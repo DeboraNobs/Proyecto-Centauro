@@ -9,9 +9,9 @@ using proyecto_centauro.Data;
 
 namespace proyecto_centauro.Migrations
 {
-    [DbContext(typeof(UsuarioContext))]
-    [Migration("20250318110950_InitialCreate")]
-    partial class InitialCreate
+    [DbContext(typeof(BBDDContext))]
+    [Migration("20250321084011_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,8 +37,13 @@ namespace proyecto_centauro.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Password")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Rol")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

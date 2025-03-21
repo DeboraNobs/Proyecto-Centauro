@@ -8,8 +8,8 @@ using proyecto_centauro.Data;
 
 namespace proyecto_centauro.Migrations
 {
-    [DbContext(typeof(UsuarioContext))]
-    partial class UsuarioContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(BBDDContext))]
+    partial class BBDDContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -35,6 +35,10 @@ namespace proyecto_centauro.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Rol")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

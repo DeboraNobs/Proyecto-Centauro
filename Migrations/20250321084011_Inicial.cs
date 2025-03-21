@@ -5,7 +5,7 @@
 namespace proyecto_centauro.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,8 @@ namespace proyecto_centauro.Migrations
                     Nombre = table.Column<string>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", nullable: false),
                     Apellidos = table.Column<string>(type: "TEXT", nullable: false),
-                    Password = table.Column<int>(type: "INTEGER", nullable: false)
+                    Password = table.Column<string>(type: "TEXT", nullable: false),
+                    Rol = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
