@@ -1,0 +1,22 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+namespace proyecto_centauro.Models
+{
+    [Table("Alquileres")]
+    public class Alquiler
+    {
+        [Key]
+        public int Id { get; set; }
+        [Required]
+        public DateTime Fechainicio { get; set; }
+        [Required]
+        public DateTime FechaFin { get; set; }
+
+        // FOREIGN KEY - USUARIOS
+        [Required]
+        public int UsersId { get; set; }
+        
+        public required Usuario Usuario { get; set; } // Propiedad de navegación, (se empareja automáticamente con UsuarioId)
+                                            // Sirve para accEder a todos los atributos del usuario. Ej --> Usuario.Email
+    }
+}

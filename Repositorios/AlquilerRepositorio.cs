@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using proyecto_centauro.Data;
+using proyecto_centauro.Interfaces;
+using proyecto_centauro.Models;
+
+namespace proyecto_centauro.Repositorios
+{
+    public class AlquilerRepositorio : IAlquilerRepositorio
+    {
+        private readonly BBDDContext _context;
+
+        public AlquilerRepositorio(BBDDContext contexto)
+        {
+            _context = contexto;
+        }
+
+        public async Task<IEnumerable<Alquiler>> ObtenerTodos()
+        {
+            return await _context.Alquileres.ToListAsync();
+        }
+        public async Task<Alquiler> ObtenerAlquilerPorId(int id)
+        {
+            var alquiler = await _context.Alquileres.FindAsync(id);
+            if (alquiler == null) throw new KeyNotFoundException($"No se ha encontrado el alquiler con el id {id}");
+            return alquiler;
+        }
+        public async Task AgregarAlquiler(Alquiler alquiler)
+        {
+            _context.Alquileres.Add(alquiler);
+            await _context.SaveChangesAsync();
+        }
+        public async Task ActualizarAlquiler(Alquiler alquiler)
+        {
+            _context.Entry(alquiler).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task EliminarAlquiler(int id)
+        {
+            var alquiler = await _context.Alquileres.FindAsync(id);
+            if (alquiler != null)
+            {
+                _context.Alquileres.Remove(alquiler);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<bool> ExisteAlquiler(int id)
+        {
+            return await _context.Alquileres.AnyAsync(e => e.Id == id);
+        }
+    }
+}
