@@ -17,7 +17,7 @@ namespace proyecto_centauro.Models
         [Required]
         public string? Apellidos { get; set; }
         [Required]
-        [Phone]
+        // [Phone]
         public string? Movil { get; set; }
         [Required]
         [RegularExpression(@"^(?=.*[A-Z])(?=.*\d).{8,}$",

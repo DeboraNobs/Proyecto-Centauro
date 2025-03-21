@@ -16,7 +16,7 @@ namespace proyecto_centauro.Models
         [Required]
         public int UsersId { get; set; }
         
-        public required Usuario Usuario { get; set; } // Propiedad de navegación, (se empareja automáticamente con UsuarioId)
+        public Usuario Usuario { get; set; } // Propiedad de navegación, (se empareja automáticamente con UsuarioId)
                                             // Sirve para accEder a todos los atributos del usuario. Ej --> Usuario.Email
     }
 }

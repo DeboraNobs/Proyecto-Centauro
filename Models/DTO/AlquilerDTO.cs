@@ -1,0 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
+namespace proyecto_centauro.Models;
+
+public class AlquilerDTO {
+    public int Id { get; set; }
+    public DateTime Fechainicio { get; set; }
+    public DateTime FechaFin { get; set; }
+    public int UsersId { get; set; }
+}

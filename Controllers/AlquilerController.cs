@@ -40,7 +40,7 @@ namespace proyecto_centauro.Controllers
         [HttpPost]
         public async Task<ActionResult> CrearAlquiler([FromBody] Alquiler alquiler)
         {
-            if (alquiler == null) return BadRequest();
+            if (alquiler == null) return BadRequest("Alquiler no debe ser nulo");
             await _alquilerRepositorio.AgregarAlquiler(alquiler);
             return StatusCode(201, alquiler);
         }

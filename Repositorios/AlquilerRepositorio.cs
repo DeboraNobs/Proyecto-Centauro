@@ -30,6 +30,10 @@ namespace proyecto_centauro.Repositorios
         }
         public async Task AgregarAlquiler(Alquiler alquiler)
         {
+            // primero debo asegurarme de que el Usuario relacionado con el UsersId existe antes de agregar el alquiler
+            var usuario = await _context.Users.FindAsync(alquiler.UsersId);
+            if (usuario == null) throw new KeyNotFoundException($"No se ha encontrado un usuario con id: {alquiler.UsersId}");
+    
             _context.Alquileres.Add(alquiler);
             await _context.SaveChangesAsync();
         }
