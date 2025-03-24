@@ -55,6 +55,16 @@ namespace proyecto_centauro.Controllers
             return NoContent(); 
         }
 
-        
+        [HttpPost("login")] // envío un post con un parametro login
+        public async Task<ActionResult> Login([FromBody] Login loginRequest) 
+        {
+            if (string.IsNullOrEmpty(loginRequest.Email) || string.IsNullOrEmpty(loginRequest.Password)) 
+                return BadRequest("El email y la contraseña son obligatorios");
+
+            var usuario = await _userRepositorio.ValidarCredencialesAsync(loginRequest.Email, loginRequest.Password);
+            if (usuario == null)  return NotFound("Usuario no encontrado");
+            return Ok($"Inicio de sesión con email: {usuario.Email}");
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using proyecto_centauro.Data;
 
@@ -10,12 +11,29 @@ using proyecto_centauro.Data;
 namespace proyecto_centauro.Migrations
 {
     [DbContext(typeof(BBDDContext))]
-    partial class BBDDContextModelSnapshot : ModelSnapshot
+    [Migration("20250324084853_TablaServicio-AlquilerServicio")]
+    partial class TablaServicioAlquilerServicio
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.3");
+
+            modelBuilder.Entity("AlquilerServicio", b =>
+                {
+                    b.Property<int>("AlquileresId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ServiciosId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("AlquileresId", "ServiciosId");
+
+                    b.HasIndex("ServiciosId");
+
+                    b.ToTable("AlquilerServicio");
+                });
 
             modelBuilder.Entity("proyecto_centauro.Models.Alquiler", b =>
                 {
@@ -60,30 +78,6 @@ namespace proyecto_centauro.Migrations
                     b.ToTable("Servicios");
                 });
 
-            modelBuilder.Entity("proyecto_centauro.Models.ServicioAlquiler", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AlquilerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<decimal>("Precio")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ServicioId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AlquilerId");
-
-                    b.HasIndex("ServicioId");
-
-                    b.ToTable("ServicioAlquiler");
-                });
-
             modelBuilder.Entity("proyecto_centauro.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -119,6 +113,21 @@ namespace proyecto_centauro.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("AlquilerServicio", b =>
+                {
+                    b.HasOne("proyecto_centauro.Models.Alquiler", null)
+                        .WithMany()
+                        .HasForeignKey("AlquileresId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proyecto_centauro.Models.Servicio", null)
+                        .WithMany()
+                        .HasForeignKey("ServiciosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("proyecto_centauro.Models.Alquiler", b =>
                 {
                     b.HasOne("proyecto_centauro.Models.Usuario", "Usuario")
@@ -128,35 +137,6 @@ namespace proyecto_centauro.Migrations
                         .IsRequired();
 
                     b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("proyecto_centauro.Models.ServicioAlquiler", b =>
-                {
-                    b.HasOne("proyecto_centauro.Models.Alquiler", "Alquiler")
-                        .WithMany("ServicioAlquileres")
-                        .HasForeignKey("AlquilerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("proyecto_centauro.Models.Servicio", "Servicio")
-                        .WithMany("ServicioAlquileres")
-                        .HasForeignKey("ServicioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Alquiler");
-
-                    b.Navigation("Servicio");
-                });
-
-            modelBuilder.Entity("proyecto_centauro.Models.Alquiler", b =>
-                {
-                    b.Navigation("ServicioAlquileres");
-                });
-
-            modelBuilder.Entity("proyecto_centauro.Models.Servicio", b =>
-                {
-                    b.Navigation("ServicioAlquileres");
                 });
 
             modelBuilder.Entity("proyecto_centauro.Models.Usuario", b =>

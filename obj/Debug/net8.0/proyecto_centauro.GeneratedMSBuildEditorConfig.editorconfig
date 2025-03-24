@@ -26,46 +26,26 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\DNOBS\Desktop\proyecto_centauro
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/DNOBS/Desktop/proyecto_centauro/Views/Alquiler/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxxdWlsZXJcQ3JlYXRlLmNzaHRtbA==
+[C:/Users/DNOBS/Desktop/proyecto_centauro/Views/Servicio/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljaW9cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DNOBS/Desktop/proyecto_centauro/Views/Alquiler/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxxdWlsZXJcRGVsZXRlLmNzaHRtbA==
+[C:/Users/DNOBS/Desktop/proyecto_centauro/Views/Servicio/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljaW9cRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DNOBS/Desktop/proyecto_centauro/Views/Alquiler/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxxdWlsZXJcRGV0YWlscy5jc2h0bWw=
+[C:/Users/DNOBS/Desktop/proyecto_centauro/Views/Servicio/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljaW9cRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DNOBS/Desktop/proyecto_centauro/Views/Alquiler/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxxdWlsZXJcRWRpdC5jc2h0bWw=
+[C:/Users/DNOBS/Desktop/proyecto_centauro/Views/Servicio/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljaW9cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/DNOBS/Desktop/proyecto_centauro/Views/Alquiler/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxxdWlsZXJcSW5kZXguY3NodG1s
+[C:/Users/DNOBS/Desktop/proyecto_centauro/Views/Servicio/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljaW9cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/DNOBS/Desktop/proyecto_centauro/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/DNOBS/Desktop/proyecto_centauro/Views/Usuario/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/DNOBS/Desktop/proyecto_centauro/Views/Usuario/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/DNOBS/Desktop/proyecto_centauro/Views/Usuario/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xEZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/DNOBS/Desktop/proyecto_centauro/Views/Usuario/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xFZGl0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/DNOBS/Desktop/proyecto_centauro/Views/Usuario/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

@@ -14,7 +14,6 @@ namespace proyecto_centauro.Repositorios
             _context = contexto;
         }
 
-
         public async Task<IEnumerable<Usuario>> ObtenerTodosAsync() // Task<> significa que la función devuelve una tarea asíncrona.
         {
             return await _context.Users.ToListAsync();
@@ -24,6 +23,20 @@ namespace proyecto_centauro.Repositorios
             var usuario = await _context.Users.FindAsync(id);
             if (usuario == null) throw new KeyNotFoundException($"No se encontró el usuario con ID {id}");
             return usuario;
+        }
+
+        public async Task<Usuario?> ValidarCredencialesAsync(string email, string password) // se aclara que lo que se devuelve puede ser null
+        {                                                                                   // porque el usuario puede no existir
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+                throw new ArgumentException("El email y la contraseña son obligatorios");
+
+            var usuario = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            if (usuario == null) return null; // no existe el usuario
+
+            // si existe el email, se verifica que la contraseña coincida
+            if (usuario.Password != password) return null; 
+
+            return usuario; 
         }
         public async Task AgregarAsync(Usuario usuario)
         {

@@ -15,8 +15,10 @@ namespace proyecto_centauro.Models
         // FOREIGN KEY - USUARIOS
         [Required]
         public int UsersId { get; set; }
-        
-        public Usuario Usuario { get; set; } // Propiedad de navegación, (se empareja automáticamente con UsuarioId)
+        public Usuario? Usuario { get; set; } // Propiedad de navegación, (se empareja automáticamente con UsuarioId)
                                             // Sirve para accEder a todos los atributos del usuario. Ej --> Usuario.Email
+       
+       // refleja la relación M:M con Servicios a través de la tabla intermedia
+        public List<ServicioAlquiler> ServicioAlquileres { get; set; } = [];
     }
 }

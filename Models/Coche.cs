@@ -15,9 +15,4 @@ public class Coche
      public string? Tipo_cambio { get; set;}
      [Required]
      public int Num_plazas { get; set;}
- 
-   public string Index()
-     {
-         return "Funcion de entidad coche...";
-     }
  }

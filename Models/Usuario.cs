@@ -27,7 +27,7 @@ namespace proyecto_centauro.Models
         public string? Rol { get; set; }
 
         // propiedad de navegación inversa: para facilitar la navegación desde el usuario al alquiler
-        public List<Alquiler> Alquileres { get; set; } = []; // crea una nueva lista de alquileres vacía 
+        public List<Alquiler>? Alquileres { get; set; } = []; // crea una nueva lista de alquileres vacía 
         // en mi caso CREO no es necesario utilizarla porque no tengo más de una relación entre los mismos tipos. 
     }
 }

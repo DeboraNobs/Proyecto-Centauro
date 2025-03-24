@@ -42,7 +42,16 @@ namespace proyecto_centauro.Controllers
         {
             if (alquiler == null) return BadRequest("Alquiler no debe ser nulo");
             await _alquilerRepositorio.AgregarAlquiler(alquiler);
-            return StatusCode(201, alquiler);
+            // return StatusCode(201, alquiler);
+
+                var alquilerDTO = new AlquilerDTO
+                {
+                    Id = alquiler.Id,
+                    Fechainicio = alquiler.Fechainicio,
+                    FechaFin = alquiler.FechaFin,
+                    UsersId = alquiler.UsersId
+                };
+                return StatusCode(201, alquilerDTO);
         }
 
         [HttpPut("{id}")]
