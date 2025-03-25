@@ -13,7 +13,7 @@ namespace proyecto_centauro.Data;
 
         override protected void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // relación entre Usuario y Alquiler
+            // relación 1:M entre Usuario y Alquiler
             modelBuilder.Entity<Alquiler>()
                 .HasOne(a => a.Usuario)
                 .WithMany(a => a.Alquileres)
@@ -23,19 +23,29 @@ namespace proyecto_centauro.Data;
             // relacion M:M Servicio - Alquiler con atributo precio
             modelBuilder.Entity<ServicioAlquiler>()
                 .HasKey(e => e.Id); // definir clave primaria de la pivot
-            // relación 1:M de Alquiler a ServicioAlquiler
-            modelBuilder.Entity<ServicioAlquiler>()
-                .HasOne(sa => sa.Alquiler)               // un ServicioAlquiler pertenece a un solo Alquiler
+            modelBuilder.Entity<ServicioAlquiler>() // relación 1:M de Alquiler con ServicioAlquiler
+                .HasOne(s => s.Alquiler)               // un ServicioAlquiler pertenece a un solo Alquiler
                 .WithMany(a => a.ServicioAlquileres)     // un Alquiler puede tener muchos ServicioAlquileres
-                .HasForeignKey(sa => sa.AlquilerId)      // clave foránea en ServicioAlquiler
-                .OnDelete(DeleteBehavior.Cascade);       // si se elimina un Alquiler, se eliminan sus relaciones
-            // relación 1:M de Servicio a ServicioAlquiler
-            modelBuilder.Entity<ServicioAlquiler>()
-                .HasOne(sa => sa.Servicio)               // un ServicioAlquiler pertenece a un solo Servicio
+                .HasForeignKey(s => s.AlquilerId).OnDelete(DeleteBehavior.Cascade);  
+            modelBuilder.Entity<ServicioAlquiler>() // relación 1:M de Servicio con ServicioAlquiler
+                .HasOne(s => s.Servicio)               // un ServicioAlquiler pertenece a un solo Servicio
                 .WithMany(s => s.ServicioAlquileres)     // un Servicio puede estar en muchos ServicioAlquileres
-                .HasForeignKey(sa => sa.ServicioId)      // clave foránea en ServicioAlquiler
-                .OnDelete(DeleteBehavior.Cascade);       // si se elimina un Servicio, se eliminan sus relaciones
+                .HasForeignKey(s => s.ServicioId).OnDelete(DeleteBehavior.Cascade);      
 
+            // relacion M:M Grupo - Alquiler con atributo precio
+            modelBuilder.Entity<GrupoAlquiler>()
+                .HasKey(h => h.Id);
+            modelBuilder.Entity<GrupoAlquiler>() // relacion 1:M Alquiler con GrupoAlquiler
+                .HasOne(g => g.Alquiler).WithMany(g => g.GrupoAlquileres).HasForeignKey(g => g.AlquilerId).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<GrupoAlquiler>() // relacion 1:M Grupo con GrupoAlquiler
+                .HasOne(a => a.Grupo).WithMany(a => a.GrupoAlquileres).HasForeignKey(a => a.GrupoId).OnDelete(DeleteBehavior.Cascade);
+
+            // relación 1:M entre Grupo y Coche
+            modelBuilder.Entity<Coche>()
+                .HasOne(a => a.Grupo)
+                .WithMany(a => a.Coches)
+                .HasForeignKey(a => a.GrupoId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder); 
         }
@@ -45,5 +55,7 @@ namespace proyecto_centauro.Data;
         public DbSet<Alquiler> Alquileres { get; set; } 
         public DbSet<Servicio> Servicios { get; set; }
         public DbSet<ServicioAlquiler> ServicioAlquileres { get; set; }
-
+        public DbSet<Grupo> Grupos { get; set; }
+        public DbSet<GrupoAlquiler> GruposAlquileres { get; set;}
+        public DbSet<Coche> Coches { get; set; }
     }

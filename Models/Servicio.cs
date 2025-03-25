@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace proyecto_centauro.Models
 {
-     [Table("Servicios")]
+    [Table("Servicios")]
     public class Servicio
     {
         [Key]
@@ -18,8 +18,9 @@ namespace proyecto_centauro.Models
         public decimal Precio { get; set; }
 
         public decimal? PorcentajeDescuento { get; set; }
-
+    
         // la lista representa la relación M:M con Alquileres a través de la tabla intermedia
         public List<ServicioAlquiler> ServicioAlquileres { get; set; } = [];
+
     }
 }

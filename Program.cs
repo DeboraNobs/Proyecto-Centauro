@@ -31,6 +31,8 @@ builder.Services.AddDbContext<BBDDContext>(options =>
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<IAlquilerRepositorio, AlquilerRepositorio>();
 builder.Services.AddScoped<IServicioRepositorio, ServicioRepositorio>();
+builder.Services.AddScoped<IGrupoRepositorio, GrupoRepositorio>();
+builder.Services.AddScoped<ICocheRepositorio, CocheRepositorio>();
 
 builder.Services.AddEndpointsApiExplorer();
 

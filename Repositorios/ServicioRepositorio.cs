@@ -14,19 +14,18 @@ namespace proyecto_centauro.Repositorios
         {
             _context = contexto;
         }
-        [HttpGet]
         public async Task<IEnumerable<Servicio>> ObtenerTodosServicios()
         {
             return await _context.Servicios.ToListAsync();
         }
-        [HttpGet("{id}")]
+
         public async Task<Servicio> ObtenerServicioPorId(int id)
         {
             var servicio = await _context.Servicios.FindAsync(id);
             if (servicio == null) throw new KeyNotFoundException($"No se ha encontrado un servicio con id: {id}");
             return servicio;
         }
-        [HttpPost]
+  
         public async Task AgregarServicio(Servicio servicio)
         {
             _context.Servicios.Add(servicio);

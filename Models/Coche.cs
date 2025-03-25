@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace proyecto_centauro.Models;
 
@@ -12,7 +13,24 @@ public class Coche
      [Required]
      public string? Modelo { get; set;}
      [Required]
+     public string? Descripcion { get; set;}
+     [Required]
+     public string? Patente { get; set;}
+     [Required]
+     public string? Tipo_coche { get; set;}
+     [Required]
      public string? Tipo_cambio { get; set;}
      [Required]
      public int Num_plazas { get; set;}
+     [Required]
+     public int Num_maletas { get; set;}
+     [Required]
+     public int Num_puertas { get; set;}
+     [Required]
+     public bool Posee_aire_acondicionado { get; set;}
+
+    [Required]
+     public int GrupoId { get; set;}
+    [JsonIgnore] // evita que aparezca en Swagger
+     public Grupo? Grupo { get; set;} // Propiedad de navegación
  }

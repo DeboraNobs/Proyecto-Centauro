@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using proyecto_centauro.Data;
 
@@ -10,9 +11,11 @@ using proyecto_centauro.Data;
 namespace proyecto_centauro.Migrations
 {
     [DbContext(typeof(BBDDContext))]
-    partial class BBDDContextModelSnapshot : ModelSnapshot
+    [Migration("20250325094410_TablaCoche")]
+    partial class TablaCoche
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.3");

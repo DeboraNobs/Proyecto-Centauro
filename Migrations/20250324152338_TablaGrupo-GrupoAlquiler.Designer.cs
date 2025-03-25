@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using proyecto_centauro.Data;
 
@@ -10,9 +11,11 @@ using proyecto_centauro.Data;
 namespace proyecto_centauro.Migrations
 {
     [DbContext(typeof(BBDDContext))]
-    partial class BBDDContextModelSnapshot : ModelSnapshot
+    [Migration("20250324152338_TablaGrupo-GrupoAlquiler")]
+    partial class TablaGrupoGrupoAlquiler
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.3");
@@ -37,58 +40,6 @@ namespace proyecto_centauro.Migrations
                     b.HasIndex("UsersId");
 
                     b.ToTable("Alquileres");
-                });
-
-            modelBuilder.Entity("proyecto_centauro.Models.Coche", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("GrupoId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Marca")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Modelo")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Num_maletas")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Num_plazas")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Num_puertas")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Patente")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("Posee_aire_acondicionado")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Tipo_cambio")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Tipo_coche")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GrupoId");
-
-                    b.ToTable("Coches");
                 });
 
             modelBuilder.Entity("proyecto_centauro.Models.Grupo", b =>
@@ -224,17 +175,6 @@ namespace proyecto_centauro.Migrations
                         .IsRequired();
 
                     b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("proyecto_centauro.Models.Coche", b =>
-                {
-                    b.HasOne("proyecto_centauro.Models.Grupo", "Grupo")
-                        .WithMany()
-                        .HasForeignKey("GrupoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Grupo");
                 });
 
             modelBuilder.Entity("proyecto_centauro.Models.GrupoAlquiler", b =>
