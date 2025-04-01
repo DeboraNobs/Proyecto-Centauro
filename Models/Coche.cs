@@ -28,9 +28,7 @@ public class Coche
      public int Num_puertas { get; set;}
      [Required]
      public bool Posee_aire_acondicionado { get; set;}
-
-     [Required]
-     public int GrupoId { get; set;}
+     public int? GrupoId { get; set;}
 
      public int? SucursalId { get; set;}
      public Grupo? Grupo { get; set;} // Propiedad de navegación

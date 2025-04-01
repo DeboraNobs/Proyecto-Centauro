@@ -22,6 +22,14 @@ namespace proyecto_centauro.Controllers
             var coches = await _cocheRepositorio.ObtenerTodosCoches();
             return Ok(coches);
         }
+
+        [HttpGet("con-grupo")]
+        public async Task<ActionResult<IEnumerable<Coche>>> GetCochesConGrupo()
+        {
+            var coches = await _cocheRepositorio.ObtenerTodosCochesConRelacionGrupo();
+            return Ok(coches);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Coche>> GetCocheById(int id)
         {
@@ -47,14 +55,17 @@ namespace proyecto_centauro.Controllers
                 Num_plazas = coche.Num_plazas,
                 Num_maletas = coche.Num_maletas,
                 Num_puertas = coche.Num_puertas,
-                Posee_aire_acondicionado = coche.Posee_aire_acondicionado
+                Posee_aire_acondicionado = coche.Posee_aire_acondicionado,
+                GrupoId = coche.GrupoId,
+                SucursalId = coche.SucursalId,
             };
             return StatusCode(201, cocheDTO);
         }
+
         [HttpPut("{id}")]
         public async Task<ActionResult> EditarCoche(int id, [FromBody] Coche coche)
         {
-            if(id != coche.Id) return BadRequest();
+            if (id != coche.Id) return BadRequest();
             await _cocheRepositorio.ActualizarCoche(coche);
             return NoContent();
         }

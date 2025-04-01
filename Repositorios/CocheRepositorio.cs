@@ -18,10 +18,16 @@ namespace proyecto_centauro.Repositorios
 
         public async Task<IEnumerable<Coche>> ObtenerTodosCoches()
         {
+            return await _context.Coches.ToListAsync(); 
+        }
+
+        public async Task<IEnumerable<Coche>> ObtenerTodosCochesConRelacionGrupo()
+        {
             return await _context.Coches
                 .Include(c => c.Grupo)
                 .ToListAsync(); 
         }
+        
         public async Task<Coche> ObtenerCochePorId(int id)
         {
             var coche = await _context.Coches.FindAsync(id);
@@ -35,6 +41,10 @@ namespace proyecto_centauro.Repositorios
         }
         public async Task ActualizarCoche(Coche coche)
         {
+            /*var c = await _context.Coches.FindAsync(coche.Id);
+            c.Marca = coche.Marca;
+            c.Sucursal = coche.Sucursal;
+            */
             _context.Entry(coche).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }

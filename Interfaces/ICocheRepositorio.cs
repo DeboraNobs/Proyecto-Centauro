@@ -9,6 +9,7 @@ namespace proyecto_centauro.Interfaces
     public interface ICocheRepositorio
     {
         Task<IEnumerable<Coche>> ObtenerTodosCoches();
+        Task<IEnumerable<Coche>> ObtenerTodosCochesConRelacionGrupo();
         Task<Coche> ObtenerCochePorId(int id);
         Task AgregarCoche(Coche coche);
         Task ActualizarCoche(Coche coche);
