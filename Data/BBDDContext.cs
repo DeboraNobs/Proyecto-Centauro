@@ -47,6 +47,13 @@ namespace proyecto_centauro.Data;
                 .HasForeignKey(a => a.GrupoId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // relación 1:M entre Sucursal y Coche
+            modelBuilder.Entity<Coche>()
+                .HasOne(c => c.Sucursal)
+                .WithMany(d => d.Coches)
+                .HasForeignKey(c => c.SucursalId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             base.OnModelCreating(modelBuilder); 
         }
 
@@ -58,4 +65,5 @@ namespace proyecto_centauro.Data;
         public DbSet<Grupo> Grupos { get; set; }
         public DbSet<GrupoAlquiler> GruposAlquileres { get; set;}
         public DbSet<Coche> Coches { get; set; }
+        public DbSet<Sucursal> Sucursales { get; set; }
     }

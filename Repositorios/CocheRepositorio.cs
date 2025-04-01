@@ -18,7 +18,9 @@ namespace proyecto_centauro.Repositorios
 
         public async Task<IEnumerable<Coche>> ObtenerTodosCoches()
         {
-            return await _context.Coches.ToListAsync(); 
+            return await _context.Coches
+                .Include(c => c.Grupo)
+                .ToListAsync(); 
         }
         public async Task<Coche> ObtenerCochePorId(int id)
         {

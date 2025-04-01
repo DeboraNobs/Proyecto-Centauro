@@ -29,8 +29,11 @@ public class Coche
      [Required]
      public bool Posee_aire_acondicionado { get; set;}
 
-    [Required]
+     [Required]
      public int GrupoId { get; set;}
-    [JsonIgnore] // evita que aparezca en Swagger
+
+     public int? SucursalId { get; set;}
      public Grupo? Grupo { get; set;} // Propiedad de navegación
+
+     public Sucursal? Sucursal { get; set;}
  }

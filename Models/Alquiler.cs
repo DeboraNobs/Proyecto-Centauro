@@ -12,6 +12,14 @@ namespace proyecto_centauro.Models
         public DateTime Fechainicio { get; set; }
         [Required]
         public DateTime FechaFin { get; set; }
+        [Required]
+        public string? LugarRecogida { get; set; } = string.Empty;
+        [Required]
+        public string? LugarDevolucion { get; set; } = string.Empty;
+        [Required]
+        public TimeSpan HorarioRecogida {get; set; }
+        [Required]
+        public TimeSpan HorarioDevolucion {get; set; }
 
         // FOREIGN KEY - USUARIOS
         [Required]

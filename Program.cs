@@ -8,6 +8,18 @@ using proyecto_centauro.Repositorios;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Habilitar CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000") 
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
+});
+
 // configurar localización
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
@@ -22,8 +34,6 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
     });
 
-
-
 // configurar la base de datos SQLite
 builder.Services.AddDbContext<BBDDContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -33,6 +43,7 @@ builder.Services.AddScoped<IAlquilerRepositorio, AlquilerRepositorio>();
 builder.Services.AddScoped<IServicioRepositorio, ServicioRepositorio>();
 builder.Services.AddScoped<IGrupoRepositorio, GrupoRepositorio>();
 builder.Services.AddScoped<ICocheRepositorio, CocheRepositorio>();
+builder.Services.AddScoped<ISucursalRepositorio, SucursalRepositorio>();
 
 builder.Services.AddEndpointsApiExplorer();
 
@@ -53,6 +64,8 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var app = builder.Build();
+
+app.UseCors("AllowReactApp");
 
 // idioma español
 var supportedCultures = new[] { new CultureInfo("es-ES") };

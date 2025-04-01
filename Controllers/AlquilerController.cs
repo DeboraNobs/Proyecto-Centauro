@@ -42,6 +42,11 @@ namespace proyecto_centauro.Controllers
                     Id = alquiler.Id,
                     Fechainicio = alquiler.Fechainicio,
                     FechaFin = alquiler.FechaFin,
+                    LugarRecogida = alquiler.LugarRecogida,
+                    LugarDevolucion = alquiler.LugarDevolucion,
+                    HorarioRecogida = alquiler.HorarioRecogida,
+                    HorarioDevolucion = alquiler.HorarioDevolucion,
+                    
                     UsersId = alquiler.UsersId
                 };
                 return StatusCode(201, alquilerDTO);
