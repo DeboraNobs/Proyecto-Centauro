@@ -16,6 +16,6 @@ namespace proyecto_centauro.Models.DTO
      public bool Posee_aire_acondicionado { get; set;}
      public int? GrupoId { get; set;}
      public int? SucursalId { get; set;}
-     
+     public string? Imagen { get; set;}
     }
 }

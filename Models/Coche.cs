@@ -28,6 +28,8 @@ public class Coche
      public int Num_puertas { get; set;}
      [Required]
      public bool Posee_aire_acondicionado { get; set;}
+
+     public string? Imagen { get; set;}
      public int? GrupoId { get; set;}
 
      public int? SucursalId { get; set;}

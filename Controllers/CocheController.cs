@@ -38,9 +38,27 @@ namespace proyecto_centauro.Controllers
             return Ok(coche);
         }
         [HttpPost]
-        public async Task<ActionResult> CrearCoche([FromBody] Coche coche)
+        public async Task<ActionResult> CrearCoche([FromForm] Coche coche, IFormFile? imagen)
         {
-            if (coche == null) return BadRequest("Coche no debe ser nulo");
+            if (coche == null)
+                return BadRequest("Coche no debe ser nulo");
+
+            if (imagen != null && imagen.Length > 0)
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "imagenes");
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+                var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(imagen.FileName);
+                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await imagen.CopyToAsync(stream);
+                }
+                coche.Imagen = uniqueFileName;
+            }
+
             await _cocheRepositorio.AgregarCoche(coche);
 
             var cocheDTO = new CocheDTO
@@ -56,6 +74,7 @@ namespace proyecto_centauro.Controllers
                 Num_maletas = coche.Num_maletas,
                 Num_puertas = coche.Num_puertas,
                 Posee_aire_acondicionado = coche.Posee_aire_acondicionado,
+                Imagen = coche.Imagen,
                 GrupoId = coche.GrupoId,
                 SucursalId = coche.SucursalId,
             };

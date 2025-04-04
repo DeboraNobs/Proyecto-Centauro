@@ -6,6 +6,8 @@ C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\proyecto_centauro.runt
 C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\proyecto_centauro.dll
 C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\proyecto_centauro.pdb
 C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\es-ES\proyecto_centauro.resources.dll
+C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\Azure.Identity.dll
 C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\FluentValidation.dll

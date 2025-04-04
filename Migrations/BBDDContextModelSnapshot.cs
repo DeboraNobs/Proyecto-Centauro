@@ -63,8 +63,11 @@ namespace proyecto_centauro.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("GrupoId")
+                    b.Property<int?>("GrupoId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Imagen")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Marca")
                         .IsRequired()
@@ -265,8 +268,7 @@ namespace proyecto_centauro.Migrations
                     b.HasOne("proyecto_centauro.Models.Grupo", "Grupo")
                         .WithMany("Coches")
                         .HasForeignKey("GrupoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("proyecto_centauro.Models.Sucursal", "Sucursal")
                         .WithMany("Coches")
