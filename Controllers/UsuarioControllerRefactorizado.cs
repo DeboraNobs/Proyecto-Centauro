@@ -56,14 +56,14 @@ namespace proyecto_centauro.Controllers
         }
 
         [HttpPost("login")] // envío un post con un parametro login
-        public async Task<ActionResult> Login([FromBody] Login loginRequest) 
+        public async Task<ActionResult> Login([FromBody] Login request) 
         {
-            if (string.IsNullOrEmpty(loginRequest.Email) || string.IsNullOrEmpty(loginRequest.Password)) 
+            if (string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Password)) 
                 return BadRequest("El email y la contraseña son obligatorios");
 
-            var usuario = await _userRepositorio.ValidarCredencialesAsync(loginRequest.Email, loginRequest.Password);
+            var usuario = await _userRepositorio.ValidarCredencialesAsync(request.Email, request.Password);
             if (usuario == null)  return NotFound("Usuario no encontrado");
-            return Ok($"Inicio de sesión con email: {usuario.Email}");
+            return Ok(new { message = $"Inicio de sesión con email: {usuario.Email}" }); // devuelve un objeto JSON para que el front pueda leer JSON
         }
 
     }

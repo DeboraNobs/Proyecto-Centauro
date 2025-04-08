@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "DGtO6dvn8MJKDuZZSytXUHdbqoTgIkPChVv44I+sNEw=",
+  "Hash": "z0AODXZpMgGwsq9LHhgznhMFjdBwUvlEJ5B4h4MZFwg=",
   "Source": "proyecto_centauro",
   "BasePath": "_content/proyecto_centauro",
   "Mode": "Default",
@@ -16,6 +16,25 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\imagenes\\5e38631b-f848-4f5d-acf9-2da43dd051ee.jpg",
+      "SourceId": "proyecto_centauro",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\",
+      "BasePath": "_content/proyecto_centauro",
+      "RelativePath": "imagenes/5e38631b-f848-4f5d-acf9-2da43dd051ee.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imagenes\\5e38631b-f848-4f5d-acf9-2da43dd051ee.jpg"
+    },
     {
       "Identity": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\imagenes\\71db1db1-5c24-4b87-80fe-fa38564c9e87.jpg",
       "SourceId": "proyecto_centauro",
@@ -34,6 +53,63 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\imagenes\\71db1db1-5c24-4b87-80fe-fa38564c9e87.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\imagenes\\903f7586-9a9f-4414-aa0b-1354871d9d74.png",
+      "SourceId": "proyecto_centauro",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\",
+      "BasePath": "_content/proyecto_centauro",
+      "RelativePath": "imagenes/903f7586-9a9f-4414-aa0b-1354871d9d74.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imagenes\\903f7586-9a9f-4414-aa0b-1354871d9d74.png"
+    },
+    {
+      "Identity": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\imagenes\\dfce5bce-c9a8-4cbc-a255-88d5d72eac6f.png",
+      "SourceId": "proyecto_centauro",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\",
+      "BasePath": "_content/proyecto_centauro",
+      "RelativePath": "imagenes/dfce5bce-c9a8-4cbc-a255-88d5d72eac6f.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imagenes\\dfce5bce-c9a8-4cbc-a255-88d5d72eac6f.png"
+    },
+    {
+      "Identity": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\imagenes\\e03aebde-9086-4e7c-a6a0-9d31010c86ba.png",
+      "SourceId": "proyecto_centauro",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\",
+      "BasePath": "_content/proyecto_centauro",
+      "RelativePath": "imagenes/e03aebde-9086-4e7c-a6a0-9d31010c86ba.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imagenes\\e03aebde-9086-4e7c-a6a0-9d31010c86ba.png"
     }
   ]
 }

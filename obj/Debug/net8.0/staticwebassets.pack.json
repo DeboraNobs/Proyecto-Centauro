@@ -1,8 +1,24 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\imagenes\\5e38631b-f848-4f5d-acf9-2da43dd051ee.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\5e38631b-f848-4f5d-acf9-2da43dd051ee.jpg"
+    },
+    {
       "Id": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\imagenes\\71db1db1-5c24-4b87-80fe-fa38564c9e87.jpg",
       "PackagePath": "staticwebassets\\imagenes\\71db1db1-5c24-4b87-80fe-fa38564c9e87.jpg"
+    },
+    {
+      "Id": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\imagenes\\903f7586-9a9f-4414-aa0b-1354871d9d74.png",
+      "PackagePath": "staticwebassets\\imagenes\\903f7586-9a9f-4414-aa0b-1354871d9d74.png"
+    },
+    {
+      "Id": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\imagenes\\dfce5bce-c9a8-4cbc-a255-88d5d72eac6f.png",
+      "PackagePath": "staticwebassets\\imagenes\\dfce5bce-c9a8-4cbc-a255-88d5d72eac6f.png"
+    },
+    {
+      "Id": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\imagenes\\e03aebde-9086-4e7c-a6a0-9d31010c86ba.png",
+      "PackagePath": "staticwebassets\\imagenes\\e03aebde-9086-4e7c-a6a0-9d31010c86ba.png"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.proyecto_centauro.props",
