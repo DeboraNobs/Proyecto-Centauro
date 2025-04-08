@@ -30,6 +30,25 @@ namespace proyecto_centauro.Controllers
             return Ok(coches);
         }
 
+        [HttpGet("con-filtrado")]
+        public async Task<ActionResult<IEnumerable<Coche>>> GetCochesFiltrados([FromQuery] int? sucursalId)
+        {
+            try
+            {
+                var coches = await _cocheRepositorio.ObtenerCochesFiltrados(sucursalId);
+                if (coches == null || !coches.Any())
+                {
+                    return NotFound(new { mensaje = "No se encontraron coches para esta sucursal." });
+                }
+
+                return Ok(coches);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensaje = "Hubo un error al obtener los coches.", detalle = ex.Message });
+            }
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Coche>> GetCocheById(int id)
         {
@@ -82,12 +101,54 @@ namespace proyecto_centauro.Controllers
         }
 
         [HttpPut("{id}")]
+        public async Task<ActionResult> EditarCoche(int id, [FromForm] Coche coche, IFormFile? imagen)
+        {
+            if (id != coche.Id)
+                return BadRequest("El ID no coincide");
+
+            try
+            {
+                if (imagen != null && imagen.Length > 0)
+                {
+                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "imagenes");
+
+                    if (!string.IsNullOrEmpty(coche.Imagen)) // eliminar imagen anterior si existe
+                    {
+                        var imagenAnteriorPath = Path.Combine(uploadsFolder, coche.Imagen);
+                        if (System.IO.File.Exists(imagenAnteriorPath))
+                        {
+                            System.IO.File.Delete(imagenAnteriorPath);
+                        }
+                    }
+
+                    var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(imagen.FileName);
+                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await imagen.CopyToAsync(stream);
+                    }
+
+                    coche.Imagen = uniqueFileName;
+                }
+
+                await _cocheRepositorio.ActualizarCoche(coche);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al actualizar el coche: {ex.Message}");
+            }
+        }
+        /*
         public async Task<ActionResult> EditarCoche(int id, [FromBody] Coche coche)
         {
             if (id != coche.Id) return BadRequest();
             await _cocheRepositorio.ActualizarCoche(coche);
             return NoContent();
         }
+        */
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> BorrarCoche(int id)
         {

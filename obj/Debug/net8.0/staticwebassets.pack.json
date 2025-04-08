@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\imagenes\\71db1db1-5c24-4b87-80fe-fa38564c9e87.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\71db1db1-5c24-4b87-80fe-fa38564c9e87.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.proyecto_centauro.props",
+      "PackagePath": "build\\proyecto_centauro.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.proyecto_centauro.props",
+      "PackagePath": "buildMultiTargeting\\proyecto_centauro.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.proyecto_centauro.props",
+      "PackagePath": "buildTransitive\\proyecto_centauro.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.proyecto_centauro.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

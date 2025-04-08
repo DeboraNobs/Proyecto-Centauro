@@ -1,11 +1,39 @@
 {
   "Version": 1,
-  "Hash": "47lyNg/Z8Roslo94xFtVoNfgnJRWLZKyV/o09NpeXwM=",
+  "Hash": "DGtO6dvn8MJKDuZZSytXUHdbqoTgIkPChVv44I+sNEw=",
   "Source": "proyecto_centauro",
   "BasePath": "_content/proyecto_centauro",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "proyecto_centauro\\wwwroot",
+      "Source": "proyecto_centauro",
+      "ContentRoot": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\",
+      "BasePath": "_content/proyecto_centauro",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\imagenes\\71db1db1-5c24-4b87-80fe-fa38564c9e87.jpg",
+      "SourceId": "proyecto_centauro",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\wwwroot\\",
+      "BasePath": "_content/proyecto_centauro",
+      "RelativePath": "imagenes/71db1db1-5c24-4b87-80fe-fa38564c9e87.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imagenes\\71db1db1-5c24-4b87-80fe-fa38564c9e87.jpg"
+    }
+  ]
 }

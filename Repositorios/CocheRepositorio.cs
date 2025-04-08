@@ -27,6 +27,17 @@ namespace proyecto_centauro.Repositorios
                 .Include(c => c.Grupo)
                 .ToListAsync(); 
         }
+
+        public async Task<IEnumerable<Coche>> ObtenerCochesFiltrados(int? sucursalId)
+        {
+            if (sucursalId.HasValue) {
+                return await _context.Coches
+                .Where(c => c.SucursalId == sucursalId)
+                .ToListAsync();
+            }
+
+            return await _context.Coches.ToListAsync();
+        }
         
         public async Task<Coche> ObtenerCochePorId(int id)
         {

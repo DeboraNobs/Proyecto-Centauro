@@ -1,5 +1,6 @@
 C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\appsettings.json
+C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\proyecto_centauro.staticwebassets.runtime.json
 C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\proyecto_centauro.exe
 C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\proyecto_centauro.deps.json
 C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\proyecto_centauro.runtimeconfig.json
