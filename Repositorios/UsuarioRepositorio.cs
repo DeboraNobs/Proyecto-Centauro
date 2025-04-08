@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using proyecto_centauro.Data;
 using proyecto_centauro.Interfaces;
@@ -24,20 +26,22 @@ namespace proyecto_centauro.Repositorios
             if (usuario == null) throw new KeyNotFoundException($"No se encontró el usuario con ID {id}");
             return usuario;
         }
-
         public async Task<Usuario?> ValidarCredencialesAsync(string email, string password) // se aclara que lo que se devuelve puede ser null
-        {                                                                                   // porque el usuario puede no existir
+        {                                                                                       // porque el usuario puede no existir
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
                 throw new ArgumentException("El email y la contraseña son obligatorios");
 
             var usuario = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-            if (usuario == null) return null; // no existe el usuario
+            if (usuario == null) return null;
 
-            // si existe el email, se verifica que la contraseña coincida
-            if (usuario.Password != password) return null; 
+            if (usuario == null || string.IsNullOrEmpty(usuario.Password)) return null;
 
-            return usuario; 
+            var passwordHasher = new PasswordHasher<Usuario>();
+            var resultado = passwordHasher.VerifyHashedPassword(usuario, usuario.Password, password);
+
+            return resultado == PasswordVerificationResult.Success ? usuario : null;
         }
+
         public async Task AgregarAsync(Usuario usuario)
         {
             _context.Users.Add(usuario); // agrega usuario a la BBDD
