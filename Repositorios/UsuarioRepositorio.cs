@@ -26,6 +26,7 @@ namespace proyecto_centauro.Repositorios
             if (usuario == null) throw new KeyNotFoundException($"No se encontró el usuario con ID {id}");
             return usuario;
         }
+        /*
         public async Task<Usuario?> ValidarCredencialesAsync(string email, string password) // se aclara que lo que se devuelve puede ser null
         {                                                                                       // porque el usuario puede no existir
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
@@ -35,6 +36,23 @@ namespace proyecto_centauro.Repositorios
             if (usuario == null) return null;
 
             if (usuario == null || string.IsNullOrEmpty(usuario.Password)) return null;
+
+            var passwordHasher = new PasswordHasher<Usuario>();
+            var resultado = passwordHasher.VerifyHashedPassword(usuario, usuario.Password, password);
+
+            return resultado == PasswordVerificationResult.Success ? usuario : null;
+        }
+        */
+
+        public async Task<Usuario?> ValidarCredencialesAsync(string email, string password)
+        {
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+                throw new ArgumentException("El email y la contraseña son obligatorios");
+
+            var usuario = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            
+            if (usuario == null || string.IsNullOrEmpty(usuario.Password))
+                return null;
 
             var passwordHasher = new PasswordHasher<Usuario>();
             var resultado = passwordHasher.VerifyHashedPassword(usuario, usuario.Password, password);

@@ -15,6 +15,7 @@ C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\FluentValidation.dll
 C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
 C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\Humanizer.dll
+C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
 C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\Microsoft.AspNetCore.Razor.Language.dll

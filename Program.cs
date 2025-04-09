@@ -5,6 +5,10 @@ using Microsoft.Extensions.Localization;
 using proyecto_centauro.Data;
 using proyecto_centauro.Interfaces;
 using proyecto_centauro.Repositorios;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,40 +50,36 @@ builder.Services.AddScoped<ICocheRepositorio, CocheRepositorio>();
 builder.Services.AddScoped<ISucursalRepositorio, SucursalRepositorio>();
 
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-// Configurar Swagger con idioma español
-builder.Services.AddSwaggerGen(options =>
+builder.Services.AddLogging(options =>
 {
-    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-    {
-        Title = "API de Proyecto Centauro",
-        Version = "v1",
-        Description = "Documentación de la API en español",
-        Contact = new Microsoft.OpenApi.Models.OpenApiContact
-        {
-            Name = "Soporte",
-            Email = "soporte@proyecto-centauro.com"
-        }
-    });
+    options.AddConsole(); 
 });
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = "tuApp",
+        ValidAudience = "tuApp",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"])),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+    };
+});
+
 
 var app = builder.Build();
 
 app.UseCors("AllowReactApp");
-
-// idioma español
-var supportedCultures = new[] { new CultureInfo("es-ES") };
-var localizationOptions = new RequestLocalizationOptions
-{
-    DefaultRequestCulture = new RequestCulture("es-ES"),
-    SupportedCultures = supportedCultures,
-    SupportedUICultures = supportedCultures
-};
-
-CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("es-ES");
-CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("es-ES");
-
-app.UseRequestLocalization(localizationOptions);
 
 if (app.Environment.IsDevelopment())
 {
@@ -88,7 +88,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
 app.Run();
 

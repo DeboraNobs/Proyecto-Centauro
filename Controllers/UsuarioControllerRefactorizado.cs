@@ -3,6 +3,11 @@ using proyecto_centauro.Interfaces;
 using proyecto_centauro.Models;
 using proyecto_centauro.Repositorios;
 using Microsoft.AspNetCore.Identity;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace proyecto_centauro.Controllers
 {
@@ -14,10 +19,12 @@ namespace proyecto_centauro.Controllers
     public class UsuarioControllerRefactorizado : Controller
     {
         private readonly IUsuarioRepositorio _userRepositorio;
+        private readonly IConfiguration config;
 
-        public UsuarioControllerRefactorizado(IUsuarioRepositorio userRepositorio)
+        public UsuarioControllerRefactorizado(IUsuarioRepositorio userRepositorio, IConfiguration config)
         {
             _userRepositorio = userRepositorio;
+            this.config = config;
         }
 
         [HttpGet]
@@ -62,7 +69,7 @@ namespace proyecto_centauro.Controllers
             await _userRepositorio.EliminarAsync(id); // si existe lo elimina y no devuelve nada
             return NoContent();
         }
-
+        /*
         [HttpPost("login")]
         public async Task<ActionResult<Usuario>> Login([FromBody] Login loginData)
         {
@@ -71,6 +78,63 @@ namespace proyecto_centauro.Controllers
 
             return Ok(usuario); 
         }
+        */
+        [HttpPost("login")]
+        public async Task<ActionResult> Login([FromBody] Login loginData)
+        {
+            try
+            {
+                Console.WriteLine("Solicitud de login recibida");
+
+                var usuario = await _userRepositorio.ValidarCredencialesAsync(loginData.Email, loginData.Password);
+                if (usuario == null) return Unauthorized("Credenciales incorrectas");
+
+                Console.WriteLine("Usuario validado, generando token...");
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JWT:Key"]));
+
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Email, usuario.Email ?? string.Empty),
+                    new Claim(ClaimTypes.Name, !string.IsNullOrEmpty(usuario.Nombre) ? usuario.Nombre : usuario.Email ?? string.Empty),
+                };
+
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(claims),
+                    Expires = DateTime.UtcNow.AddHours(1),
+                    Issuer = "tuApp",
+                    Audience = "tuApp",
+                    SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature)
+                };
+
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                var tokenString = tokenHandler.WriteToken(token);
+
+
+                Console.WriteLine($"Token generado: {tokenString}");
+
+                return Ok(new
+                {
+                    mensaje = "Estás autorizado ✅",
+                    token = tokenString,
+                    usuario = new
+                    {
+                        usuario.Id,
+                        usuario.Nombre,
+                        usuario.Email
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en login: {ex.Message}");
+                return StatusCode(500, "Error en el servidor");
+            }
+        }
+
+
 
     }
 
