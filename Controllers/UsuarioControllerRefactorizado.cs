@@ -69,16 +69,7 @@ namespace proyecto_centauro.Controllers
             await _userRepositorio.EliminarAsync(id); // si existe lo elimina y no devuelve nada
             return NoContent();
         }
-        /*
-        [HttpPost("login")]
-        public async Task<ActionResult<Usuario>> Login([FromBody] Login loginData)
-        {
-            var usuario = await _userRepositorio.ValidarCredencialesAsync(loginData.Email, loginData.Password);
-            if (usuario == null) return Unauthorized("Credenciales incorrectas");
-
-            return Ok(usuario); 
-        }
-        */
+    
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] Login loginData)
         {
@@ -88,7 +79,7 @@ namespace proyecto_centauro.Controllers
 
                 var usuario = await _userRepositorio.ValidarCredencialesAsync(loginData.Email, loginData.Password);
                 if (usuario == null) return Unauthorized("Credenciales incorrectas");
-
+    
                 Console.WriteLine("Usuario validado, generando token...");
 
                 var tokenHandler = new JwtSecurityTokenHandler();
