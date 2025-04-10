@@ -22,8 +22,7 @@ namespace proyecto_centauro.Models
         public TimeSpan HorarioDevolucion {get; set; }
 
         // FOREIGN KEY - USUARIOS
-        [Required]
-        public int UsersId { get; set; }
+        public int? UsersId { get; set; }
         public Usuario? Usuario { get; set; } // Propiedad de navegación, para acceder a todos los atributos del usuario. Ej --> Usuario.Email
        
        // refleja la relación M:M con Servicios a través de la tabla intermedia

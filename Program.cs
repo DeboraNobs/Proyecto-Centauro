@@ -67,7 +67,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidIssuer = "tuApp",
         ValidAudience = "tuApp",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"])), // Busca en appsettings.json la key definida en JWT
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]!)), // Busca en appsettings.json la key definida en JWT
         ValidateIssuer = false,
         ValidateAudience = false,
     };

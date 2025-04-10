@@ -83,7 +83,7 @@ namespace proyecto_centauro.Controllers
                 Console.WriteLine("Usuario validado, generando token...");
 
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JWT:Key"]));
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JWT:Key"]!));
 
                 var claims = new List<Claim>
                 {

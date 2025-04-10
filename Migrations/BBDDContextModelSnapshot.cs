@@ -43,7 +43,7 @@ namespace proyecto_centauro.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("UsersId")
+                    b.Property<int?>("UsersId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -257,8 +257,7 @@ namespace proyecto_centauro.Migrations
                     b.HasOne("proyecto_centauro.Models.Usuario", "Usuario")
                         .WithMany("Alquileres")
                         .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Usuario");
                 });
