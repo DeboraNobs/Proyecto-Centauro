@@ -18,8 +18,15 @@ namespace proyecto_centauro.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Alquiler>>> GetAlquileres()
         {
-            var alquileres = await _alquilerRepositorio.ObtenerTodos();
-            return Json(alquileres);
+            try
+            {
+                var alquileres = await _alquilerRepositorio.ObtenerTodos();
+                return Json(alquileres); // Retorna un JSON válido
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensaje = "Ocurrió un error al obtener los alquileres.", detalle = ex.Message });
+            }
         }
 
         [HttpGet("{id}")]
