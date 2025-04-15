@@ -1,11 +1,12 @@
 using proyecto_centauro.Models;
+using proyecto_centauro.Models.DTO;
 
 namespace proyecto_centauro.Interfaces
 {
     public interface ICocheRepositorio
     {
         Task<IEnumerable<Coche>> ObtenerTodosCoches();
-        Task<IEnumerable<Coche>> ObtenerTodosCochesConRelacionGrupo();
+        Task<IEnumerable<CocheDTO>> ObtenerTodosCochesConRelacionGrupo(); // AQUI ANTES ERA coche
         Task<IEnumerable<Coche>> ObtenerCochesFiltrados(int? sucursalId);
         Task<Coche> ObtenerCochePorId(int id);
         Task AgregarCoche(Coche coche);

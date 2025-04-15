@@ -29,6 +29,9 @@ namespace proyecto_centauro.Migrations
                     b.Property<DateTime>("Fechainicio")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("GrupoId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<TimeSpan>("HorarioDevolucion")
                         .HasColumnType("TEXT");
 
@@ -47,6 +50,8 @@ namespace proyecto_centauro.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GrupoId");
 
                     b.HasIndex("UsersId");
 
@@ -131,30 +136,6 @@ namespace proyecto_centauro.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Grupos");
-                });
-
-            modelBuilder.Entity("proyecto_centauro.Models.GrupoAlquiler", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AlquilerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("GrupoId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<decimal>("Precio")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AlquilerId");
-
-                    b.HasIndex("GrupoId");
-
-                    b.ToTable("GrupoAlquiler");
                 });
 
             modelBuilder.Entity("proyecto_centauro.Models.Servicio", b =>
@@ -254,10 +235,17 @@ namespace proyecto_centauro.Migrations
 
             modelBuilder.Entity("proyecto_centauro.Models.Alquiler", b =>
                 {
+                    b.HasOne("proyecto_centauro.Models.Grupo", "Grupo")
+                        .WithMany("Alquileres")
+                        .HasForeignKey("GrupoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("proyecto_centauro.Models.Usuario", "Usuario")
                         .WithMany("Alquileres")
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Grupo");
 
                     b.Navigation("Usuario");
                 });
@@ -277,25 +265,6 @@ namespace proyecto_centauro.Migrations
                     b.Navigation("Grupo");
 
                     b.Navigation("Sucursal");
-                });
-
-            modelBuilder.Entity("proyecto_centauro.Models.GrupoAlquiler", b =>
-                {
-                    b.HasOne("proyecto_centauro.Models.Alquiler", "Alquiler")
-                        .WithMany("GrupoAlquileres")
-                        .HasForeignKey("AlquilerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("proyecto_centauro.Models.Grupo", "Grupo")
-                        .WithMany("GrupoAlquileres")
-                        .HasForeignKey("GrupoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Alquiler");
-
-                    b.Navigation("Grupo");
                 });
 
             modelBuilder.Entity("proyecto_centauro.Models.ServicioAlquiler", b =>
@@ -319,16 +288,14 @@ namespace proyecto_centauro.Migrations
 
             modelBuilder.Entity("proyecto_centauro.Models.Alquiler", b =>
                 {
-                    b.Navigation("GrupoAlquileres");
-
                     b.Navigation("ServicioAlquileres");
                 });
 
             modelBuilder.Entity("proyecto_centauro.Models.Grupo", b =>
                 {
-                    b.Navigation("Coches");
+                    b.Navigation("Alquileres");
 
-                    b.Navigation("GrupoAlquileres");
+                    b.Navigation("Coches");
                 });
 
             modelBuilder.Entity("proyecto_centauro.Models.Servicio", b =>

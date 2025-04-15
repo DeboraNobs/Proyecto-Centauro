@@ -31,10 +31,7 @@ namespace proyecto_centauro.Controllers
         }
 
         [HttpGet("con-filtrado")]
-        public async Task<ActionResult<IEnumerable<Coche>>> GetCochesFiltrados(
-            [FromQuery] DateTime fechainicio, 
-            [FromQuery] DateTime fechaFin,
-            [FromQuery] int? sucursalId)
+        public async Task<ActionResult<IEnumerable<Coche>>> GetCochesFiltrados([FromQuery] int? sucursalId)
         {
             try
             {

@@ -17,11 +17,10 @@ namespace proyecto_centauro.Models
      [MaxLength(200)]
      public string? Descripcion { get; set;}
 
-     // representa relación M:M con Alquiler 
-     [JsonIgnore] // evita que aparezca en Swagger
-    public List<GrupoAlquiler> GrupoAlquileres { get; set; } = [];
-
-    // propiedad de navegación inversa: para facilitar la navegación desde el grupo al coche
+    // propiedad de navegación inversa: para facilitar la navegación desde el grupo al coche, y desde el grupo al alquiler
     public List<Coche>? Coches { get; set; } = [];
+
+    public List<Alquiler>? Alquileres { get; set; } = [];
+
     }
 }

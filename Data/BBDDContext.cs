@@ -32,13 +32,13 @@ namespace proyecto_centauro.Data;
                 .WithMany(s => s.ServicioAlquileres)     // un Servicio puede estar en muchos ServicioAlquileres
                 .HasForeignKey(s => s.ServicioId).OnDelete(DeleteBehavior.Cascade);      
 
-            // relacion M:M Grupo - Alquiler con atributo precio
-            modelBuilder.Entity<GrupoAlquiler>()
-                .HasKey(h => h.Id);
-            modelBuilder.Entity<GrupoAlquiler>() // relacion 1:M Alquiler con GrupoAlquiler
-                .HasOne(g => g.Alquiler).WithMany(g => g.GrupoAlquileres).HasForeignKey(g => g.AlquilerId).OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<GrupoAlquiler>() // relacion 1:M Grupo con GrupoAlquiler
-                .HasOne(a => a.Grupo).WithMany(a => a.GrupoAlquileres).HasForeignKey(a => a.GrupoId).OnDelete(DeleteBehavior.Cascade);
+            
+            // relación 1:M entre Grupo y Alquiler
+            modelBuilder.Entity<Alquiler>()
+                .HasOne(a => a.Grupo)
+                .WithMany(a => a.Alquileres)
+                .HasForeignKey(a => a.GrupoId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // relación 1:M entre Grupo y Coche
             modelBuilder.Entity<Coche>()
@@ -63,7 +63,6 @@ namespace proyecto_centauro.Data;
         public DbSet<Servicio> Servicios { get; set; }
         public DbSet<ServicioAlquiler> ServicioAlquileres { get; set; }
         public DbSet<Grupo> Grupos { get; set; }
-        public DbSet<GrupoAlquiler> GruposAlquileres { get; set;}
         public DbSet<Coche> Coches { get; set; }
         public DbSet<Sucursal> Sucursales { get; set; }
     }

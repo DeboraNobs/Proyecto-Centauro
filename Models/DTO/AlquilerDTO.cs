@@ -10,4 +10,5 @@ public class AlquilerDTO {
     public TimeSpan HorarioRecogida {get; set; }
     public TimeSpan HorarioDevolucion {get; set; }
     public int? UsersId { get; set; }
+    public int? GrupoId { get; set; }
 }

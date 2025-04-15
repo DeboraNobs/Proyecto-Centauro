@@ -25,11 +25,11 @@ namespace proyecto_centauro.Models
         public int? UsersId { get; set; }
         public Usuario? Usuario { get; set; } // Propiedad de navegación, para acceder a todos los atributos del usuario. Ej --> Usuario.Email
        
+       // FOREIGN KEY - GRUPOS
+       public int? GrupoId { get; set; }
+       public Grupo? Grupo { get; set; }
        // refleja la relación M:M con Servicios a través de la tabla intermedia
         public List<ServicioAlquiler> ServicioAlquileres { get; set; } = [];
 
-        // representa relación M:M con Grupos 
-        [JsonIgnore]
-        public List<GrupoAlquiler> GrupoAlquileres { get; set; } = [];
     }
 }

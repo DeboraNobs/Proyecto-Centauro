@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using proyecto_centauro.Data;
 using proyecto_centauro.Interfaces;
 using proyecto_centauro.Models;
+using proyecto_centauro.Models.DTO;
 
 namespace proyecto_centauro.Repositorios
 {
@@ -21,12 +22,37 @@ namespace proyecto_centauro.Repositorios
             return await _context.Coches.ToListAsync(); 
         }
 
+        /*
         public async Task<IEnumerable<Coche>> ObtenerTodosCochesConRelacionGrupo()
         {
             return await _context.Coches
                 .Include(c => c.Grupo)
                 .ToListAsync(); 
         }
+        */
+        public async Task<IEnumerable<CocheDTO>> ObtenerTodosCochesConRelacionGrupo()
+        {
+            return await _context.Coches
+                .Select(c => new CocheDTO
+                {
+                    Id = c.Id,
+                    Marca = c.Marca,
+                    Modelo = c.Modelo,
+                    Descripcion = c.Descripcion,
+                    Patente = c.Patente,
+                    Tipo_coche = c.Tipo_coche,
+                    Tipo_cambio = c.Tipo_cambio,
+                    Num_plazas = c.Num_plazas,
+                    Num_maletas = c.Num_maletas,
+                    Num_puertas = c.Num_puertas,
+                    Posee_aire_acondicionado = c.Posee_aire_acondicionado,
+                    GrupoId = c.GrupoId,
+                    SucursalId = c.SucursalId,
+                    Imagen = c.Imagen
+                })
+                .ToListAsync();
+        }
+
 
         public async Task<IEnumerable<Coche>> ObtenerCochesFiltrados(int? sucursalId)
         {
