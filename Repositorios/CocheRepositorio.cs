@@ -54,18 +54,62 @@ namespace proyecto_centauro.Repositorios
                 .ToListAsync();
         }
 
+        /*
         public async Task<IEnumerable<Coche>> ObtenerCochesFiltrados(int? sucursalId)
         {
             if (sucursalId.HasValue)
             {
                 return await _context.Coches
                 .Where(c => c.SucursalId == sucursalId)
+                .Include(c => c.Grupo)
+                .Include(a => a.Sucursal)
                 .ToListAsync();
             }
 
             return await _context.Coches.ToListAsync();
         }
+*/
 
+        public async Task<IEnumerable<Coche>> ObtenerCochesFiltrados(int? sucursalId)
+        {
+            if (sucursalId.HasValue)
+            {
+                return await _context.Coches
+                    .Where(c => c.SucursalId == sucursalId)
+                    .Select(c => new Coche
+                    {
+                        Id = c.Id,
+                        Marca = c.Marca,
+                        Modelo = c.Modelo,
+                        Descripcion = c.Descripcion,
+                        Patente = c.Patente,
+                        Tipo_coche = c.Tipo_coche,
+                        Tipo_cambio = c.Tipo_cambio,
+                        Num_plazas = c.Num_plazas,
+                        Num_maletas = c.Num_maletas,
+                        Num_puertas = c.Num_puertas,
+                        Posee_aire_acondicionado = c.Posee_aire_acondicionado,
+                        GrupoId = c.GrupoId,
+                        SucursalId = c.SucursalId,
+                        Imagen = c.Imagen,
+                        Grupo = c.Grupo == null ? null : new Grupo
+                        {
+                            Id = c.Grupo.Id,
+                            Nombre = c.Grupo.Nombre,
+                            Precio = c.Grupo.Precio,
+                            Descripcion = c.Grupo.Descripcion
+                        },
+                        Sucursal = c.Sucursal == null ? null : new Sucursal
+                        {
+                            Id = c.Sucursal.Id,
+                            Nombre = c.Sucursal.Nombre,
+                        }
+                    })
+                    .ToListAsync();
+            }
+            return await _context.Coches.ToListAsync();
+        }
+        
         public async Task<Coche> ObtenerCochePorId(int id)
         {
             var coche = await _context.Coches

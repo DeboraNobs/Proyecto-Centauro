@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "IjKS6miush0=",
+  "dgSpecHash": "tjO9cWaCDrE=",
   "success": true,
   "projectFilePath": "C:\\Users\\DNOBS\\Desktop\\proyecto_centauro\\proyecto_centauro.csproj",
   "expectedPackageFiles": [
@@ -82,13 +82,14 @@
     "C:\\Users\\DNOBS\\.nuget\\packages\\microsoft.aspnetcore.http.extensions\\2.3.0\\microsoft.aspnetcore.http.extensions.2.3.0.nupkg.sha512",
     "C:\\Users\\DNOBS\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.3.0\\microsoft.aspnetcore.http.features.2.3.0.nupkg.sha512",
     "C:\\Users\\DNOBS\\.nuget\\packages\\microsoft.aspnetcore.identity\\2.3.1\\microsoft.aspnetcore.identity.2.3.1.nupkg.sha512",
-    "C:\\Users\\DNOBS\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\2.3.0\\microsoft.aspnetcore.jsonpatch.2.3.0.nupkg.sha512",
+    "C:\\Users\\DNOBS\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\8.0.4\\microsoft.aspnetcore.jsonpatch.8.0.4.nupkg.sha512",
     "C:\\Users\\DNOBS\\.nuget\\packages\\microsoft.aspnetcore.localization\\2.3.0\\microsoft.aspnetcore.localization.2.3.0.nupkg.sha512",
     "C:\\Users\\DNOBS\\.nuget\\packages\\microsoft.aspnetcore.mvc.abstractions\\2.3.0\\microsoft.aspnetcore.mvc.abstractions.2.3.0.nupkg.sha512",
     "C:\\Users\\DNOBS\\.nuget\\packages\\microsoft.aspnetcore.mvc.core\\2.3.0\\microsoft.aspnetcore.mvc.core.2.3.0.nupkg.sha512",
     "C:\\Users\\DNOBS\\.nuget\\packages\\microsoft.aspnetcore.mvc.dataannotations\\2.3.0\\microsoft.aspnetcore.mvc.dataannotations.2.3.0.nupkg.sha512",
     "C:\\Users\\DNOBS\\.nuget\\packages\\microsoft.aspnetcore.mvc.formatters.json\\2.3.0\\microsoft.aspnetcore.mvc.formatters.json.2.3.0.nupkg.sha512",
     "C:\\Users\\DNOBS\\.nuget\\packages\\microsoft.aspnetcore.mvc.localization\\2.3.0\\microsoft.aspnetcore.mvc.localization.2.3.0.nupkg.sha512",
+    "C:\\Users\\DNOBS\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\8.0.4\\microsoft.aspnetcore.mvc.newtonsoftjson.8.0.4.nupkg.sha512",
     "C:\\Users\\DNOBS\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor\\2.3.0\\microsoft.aspnetcore.mvc.razor.2.3.0.nupkg.sha512",
     "C:\\Users\\DNOBS\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.extensions\\2.3.0\\microsoft.aspnetcore.mvc.razor.extensions.2.3.0.nupkg.sha512",
     "C:\\Users\\DNOBS\\.nuget\\packages\\microsoft.aspnetcore.mvc.viewfeatures\\2.3.0\\microsoft.aspnetcore.mvc.viewfeatures.2.3.0.nupkg.sha512",

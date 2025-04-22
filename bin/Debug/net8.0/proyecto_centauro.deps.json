@@ -15,6 +15,7 @@
           "Microsoft.AspNetCore.Localization": "2.3.0",
           "Microsoft.AspNetCore.Mvc.DataAnnotations": "2.3.0",
           "Microsoft.AspNetCore.Mvc.Localization": "2.3.0",
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "8.0.4",
           "Microsoft.EntityFrameworkCore.Design": "9.0.3",
           "Microsoft.EntityFrameworkCore.InMemory": "9.0.3",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.3",
@@ -801,15 +802,15 @@
           "Microsoft.Extensions.Identity.Core": "2.3.0"
         }
       },
-      "Microsoft.AspNetCore.JsonPatch/2.3.0": {
+      "Microsoft.AspNetCore.JsonPatch/8.0.4": {
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "Newtonsoft.Json": "13.0.3"
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.dll": {
-            "assemblyVersion": "2.3.0.0",
-            "fileVersion": "2.3.0.25014"
+          "lib/net8.0/Microsoft.AspNetCore.JsonPatch.dll": {
+            "assemblyVersion": "8.0.4.0",
+            "fileVersion": "8.0.424.17014"
           }
         }
       },
@@ -854,7 +855,7 @@
       },
       "Microsoft.AspNetCore.Mvc.Formatters.Json/2.3.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.JsonPatch": "2.3.0",
+          "Microsoft.AspNetCore.JsonPatch": "8.0.4",
           "Microsoft.AspNetCore.Mvc.Core": "2.3.0"
         }
       },
@@ -864,6 +865,19 @@
           "Microsoft.AspNetCore.Mvc.Razor": "2.3.0",
           "Microsoft.Extensions.DependencyInjection": "9.0.3",
           "Microsoft.Extensions.Localization": "9.0.3"
+        }
+      },
+      "Microsoft.AspNetCore.Mvc.NewtonsoftJson/8.0.4": {
+        "dependencies": {
+          "Microsoft.AspNetCore.JsonPatch": "8.0.4",
+          "Newtonsoft.Json": "13.0.3",
+          "Newtonsoft.Json.Bson": "1.0.2"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll": {
+            "assemblyVersion": "8.0.4.0",
+            "fileVersion": "8.0.424.17014"
+          }
         }
       },
       "Microsoft.AspNetCore.Mvc.Razor/2.3.0": {
@@ -3372,12 +3386,12 @@
       "path": "microsoft.aspnetcore.identity/2.3.1",
       "hashPath": "microsoft.aspnetcore.identity.2.3.1.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.JsonPatch/2.3.0": {
+    "Microsoft.AspNetCore.JsonPatch/8.0.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-xrcdmMlZxwZM0n65T8gq8/erN0aW8HyBXJYhBk3cyfboVQsE/S9h9R59wILMgA4wal3glih+6l06XGs8AnELWA==",
-      "path": "microsoft.aspnetcore.jsonpatch/2.3.0",
-      "hashPath": "microsoft.aspnetcore.jsonpatch.2.3.0.nupkg.sha512"
+      "sha512": "sha512-8iy7uza6GTuE5GadOryGfsGuA8xP1RTs16zqdXF5gM0b8iDfyNWnyDmatY5cZhXE1kJiko0S7s1T/gNFdIZ7Zg==",
+      "path": "microsoft.aspnetcore.jsonpatch/8.0.4",
+      "hashPath": "microsoft.aspnetcore.jsonpatch.8.0.4.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Localization/2.3.0": {
       "type": "package",
@@ -3420,6 +3434,13 @@
       "sha512": "sha512-tn2/RtmOWar821IBaMuMrg/b11sPhFS0DlAa+R+0HIvREq17WkMhpkaY97BNzEhaPJqRljz6clVckRFq9hkNhQ==",
       "path": "microsoft.aspnetcore.mvc.localization/2.3.0",
       "hashPath": "microsoft.aspnetcore.mvc.localization.2.3.0.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Mvc.NewtonsoftJson/8.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lhJq0JjrlGZQwQoYrpVbokhb1AlgLGxI3QacSyKgCNOXTNwCi0pUnMR7NrfON20DkL90Kqqyl3wDrLbRaRgcsA==",
+      "path": "microsoft.aspnetcore.mvc.newtonsoftjson/8.0.4",
+      "hashPath": "microsoft.aspnetcore.mvc.newtonsoftjson.8.0.4.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Mvc.Razor/2.3.0": {
       "type": "package",

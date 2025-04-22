@@ -329,3 +329,4 @@ C:\Users\DNOBS\Desktop\proyecto_centauro\obj\Debug\net8.0\refint\proyecto_centau
 C:\Users\DNOBS\Desktop\proyecto_centauro\obj\Debug\net8.0\proyecto_centauro.pdb
 C:\Users\DNOBS\Desktop\proyecto_centauro\obj\Debug\net8.0\proyecto_centauro.genruntimeconfig.cache
 C:\Users\DNOBS\Desktop\proyecto_centauro\obj\Debug\net8.0\ref\proyecto_centauro.dll
+C:\Users\DNOBS\Desktop\proyecto_centauro\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
