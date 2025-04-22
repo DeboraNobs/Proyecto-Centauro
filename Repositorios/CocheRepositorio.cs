@@ -54,21 +54,6 @@ namespace proyecto_centauro.Repositorios
                 .ToListAsync();
         }
 
-        /*
-        public async Task<IEnumerable<Coche>> ObtenerCochesFiltrados(int? sucursalId)
-        {
-            if (sucursalId.HasValue)
-            {
-                return await _context.Coches
-                .Where(c => c.SucursalId == sucursalId)
-                .Include(c => c.Grupo)
-                .Include(a => a.Sucursal)
-                .ToListAsync();
-            }
-
-            return await _context.Coches.ToListAsync();
-        }
-*/
 
         public async Task<IEnumerable<Coche>> ObtenerCochesFiltrados(int? sucursalId)
         {
@@ -109,7 +94,9 @@ namespace proyecto_centauro.Repositorios
             }
             return await _context.Coches.ToListAsync();
         }
-        
+
+
+
         public async Task<Coche> ObtenerCochePorId(int id)
         {
             var coche = await _context.Coches

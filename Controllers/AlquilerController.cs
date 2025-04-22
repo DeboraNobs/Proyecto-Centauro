@@ -21,7 +21,7 @@ namespace proyecto_centauro.Controllers
             try
             {
                 var alquileres = await _alquilerRepositorio.ObtenerTodos();
-                return Json(alquileres); // Retorna un JSON válido
+                return Json(alquileres);
             }
             catch (Exception ex)
             {
@@ -41,7 +41,10 @@ namespace proyecto_centauro.Controllers
         public async Task<ActionResult> CrearAlquiler([FromBody] Alquiler alquiler)
         {
             if (alquiler == null) return BadRequest("Alquiler no debe ser nulo");
-            await _alquilerRepositorio.AgregarAlquiler(alquiler);
+
+            try
+            {
+                await _alquilerRepositorio.AgregarAlquiler(alquiler);
 
                 var alquilerDTO = new AlquilerDTO
                 {
@@ -49,15 +52,30 @@ namespace proyecto_centauro.Controllers
                     Fechainicio = alquiler.Fechainicio,
                     FechaFin = alquiler.FechaFin,
                     LugarRecogida = alquiler.LugarRecogida!,
-                    LugarDevolucion = alquiler.LugarDevolucion!, // ! = que permite valores nulos a la derecha
+                    LugarDevolucion = alquiler.LugarDevolucion!,
                     HorarioRecogida = alquiler.HorarioRecogida,
                     HorarioDevolucion = alquiler.HorarioDevolucion,
-        
                     UsersId = alquiler.UsersId,
-                    GrupoId =  alquiler.GrupoId
+                    GrupoId = alquiler.GrupoId
                 };
+
                 return StatusCode(201, alquilerDTO);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return Unauthorized(new { message = "Debe loguearse para alquilar un coche" , detail = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = "No hay coches disponibles en este grupo para alquilar." , detail = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error interno del servidor", detail = ex.Message });
+            }
         }
+
+
 
         [HttpPut("{id}")]
         public async Task<ActionResult> EditarAlquiler(int id, [FromBody] Alquiler alquiler)
@@ -77,6 +95,6 @@ namespace proyecto_centauro.Controllers
             return NoContent();
         }
 
-    
+
     }
 }

@@ -29,7 +29,7 @@ namespace proyecto_centauro.Models
        public int? GrupoId { get; set; }
        public Grupo? Grupo { get; set; }
        // refleja la relación M:M con Servicios a través de la tabla intermedia
-        public List<ServicioAlquiler> ServicioAlquileres { get; set; } = [];
+       public List<ServicioAlquiler> ServicioAlquileres { get; set; } = [];
 
     }
 }

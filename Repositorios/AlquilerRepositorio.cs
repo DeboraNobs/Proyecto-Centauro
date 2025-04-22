@@ -24,6 +24,8 @@ namespace proyecto_centauro.Repositorios
             if (alquiler == null) throw new KeyNotFoundException($"No se ha encontrado el alquiler con el id {id}");
             return alquiler;
         }
+
+        /*
         public async Task AgregarAlquiler(Alquiler alquiler)
         {
             // primero debo asegurarme de que el Usuario relacionado con el UsersId existe antes de agregar el alquiler
@@ -33,6 +35,32 @@ namespace proyecto_centauro.Repositorios
             _context.Alquileres.Add(alquiler);
             await _context.SaveChangesAsync();
         }
+        */
+
+        public async Task AgregarAlquiler(Alquiler alquiler)
+        {
+            var usuario = await _context.Users.FindAsync(alquiler.UsersId);
+            if (usuario == null) throw new KeyNotFoundException($"No se ha encontrado un usuario con id: {alquiler.UsersId}");
+
+            // Verificar cuántos coches hay en el grupo
+            var totalCochesEnGrupo = await _context.Coches
+                .Where(c => c.GrupoId == alquiler.GrupoId)
+                .CountAsync();
+
+            // Verificar cuántos alquileres activos hay en el grupo
+            var alquileresActivos = await _context.Alquileres
+                .Where(a => a.GrupoId == alquiler.GrupoId && a.FechaFin > DateTime.Now) // mejorar la logica
+                .CountAsync();
+
+            var cochesDisponibles = totalCochesEnGrupo - alquileresActivos;
+
+            if (cochesDisponibles <= 0) throw new InvalidOperationException("No hay coches disponibles en este grupo para alquilar.");
+            
+            _context.Alquileres.Add(alquiler);
+            await _context.SaveChangesAsync();
+        }
+
+
         public async Task ActualizarAlquiler(Alquiler alquiler)
         {
             _context.Entry(alquiler).State = EntityState.Modified;

@@ -31,11 +31,11 @@ namespace proyecto_centauro.Controllers
         }
 
         [HttpGet("con-filtrado")]
-        public async Task<ActionResult<IEnumerable<Coche>>> GetCochesFiltrados([FromQuery] int? sucursalId)
+        public async Task<ActionResult<IEnumerable<Coche>>> GetCochesFiltrados([FromQuery] int? sucursalId) //  [FromQuery] DateTime fechainicio, [FromQuery] DateTime fechaFin, [FromQuery] TimeSpan horarioRecogida, [FromQuery] TimeSpan horarioDevolucion
         {
             try
             {
-                var coches = await _cocheRepositorio.ObtenerCochesFiltrados(sucursalId);
+                var coches = await _cocheRepositorio.ObtenerCochesFiltrados(sucursalId); // fechainicio, fechaFin, horarioRecogida, horarioDevolucion
                 if (coches == null || !coches.Any())
                 {
                     return NotFound(new { mensaje = "No se encontraron coches para esta sucursal." });
