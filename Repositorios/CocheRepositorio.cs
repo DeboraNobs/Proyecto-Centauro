@@ -19,21 +19,15 @@ namespace proyecto_centauro.Repositorios
 
         public async Task<IEnumerable<Coche>> ObtenerTodosCoches()
         {
-            return await _context.Coches.ToListAsync(); 
+            return await _context.Coches.ToListAsync();
         }
 
-        /*
+
         public async Task<IEnumerable<Coche>> ObtenerTodosCochesConRelacionGrupo()
         {
             return await _context.Coches
-                .Include(c => c.Grupo)
-                .ToListAsync(); 
-        }
-        */
-        public async Task<IEnumerable<CocheDTO>> ObtenerTodosCochesConRelacionGrupo()
-        {
-            return await _context.Coches
-                .Select(c => new CocheDTO
+
+                .Select(c => new Coche
                 {
                     Id = c.Id,
                     Marca = c.Marca,
@@ -48,15 +42,22 @@ namespace proyecto_centauro.Repositorios
                     Posee_aire_acondicionado = c.Posee_aire_acondicionado,
                     GrupoId = c.GrupoId,
                     SucursalId = c.SucursalId,
-                    Imagen = c.Imagen
+                    Imagen = c.Imagen,
+                    Grupo = c.Grupo == null ? null : new Grupo // gracias a crear un nuevo grupo se devuelven bien los datos 
+                    {
+                        Id = c.Grupo.Id,
+                        Nombre = c.Grupo.Nombre,
+                        Precio = c.Grupo.Precio,
+                        Descripcion = c.Grupo.Descripcion,
+                    }
                 })
                 .ToListAsync();
         }
 
-
         public async Task<IEnumerable<Coche>> ObtenerCochesFiltrados(int? sucursalId)
         {
-            if (sucursalId.HasValue) {
+            if (sucursalId.HasValue)
+            {
                 return await _context.Coches
                 .Where(c => c.SucursalId == sucursalId)
                 .ToListAsync();
@@ -65,13 +66,19 @@ namespace proyecto_centauro.Repositorios
             return await _context.Coches.ToListAsync();
         }
 
-        
         public async Task<Coche> ObtenerCochePorId(int id)
         {
-            var coche = await _context.Coches.FindAsync(id);
+            var coche = await _context.Coches
+                .Include(c => c.Grupo) // muestra todos los datos de los grupos relacionados, permite acceder a Grupo.precio
+                .Include(a => a.Sucursal)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
             if (coche == null) throw new KeyNotFoundException($"No se encontró un coche con id {id}");
+
             return coche;
         }
+
+
         public async Task AgregarCoche(Coche coche)
         {
             _context.Coches.Add(coche);
@@ -89,7 +96,8 @@ namespace proyecto_centauro.Repositorios
         public async Task EliminarCoche(int id)
         {
             var coche = await _context.Coches.FindAsync(id);
-            if (coche != null) {
+            if (coche != null)
+            {
                 _context.Coches.Remove(coche);
                 await _context.SaveChangesAsync();
             }

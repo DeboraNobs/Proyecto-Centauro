@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace proyecto_centauro.Models;
@@ -30,10 +31,14 @@ public class Coche
      public bool Posee_aire_acondicionado { get; set;}
 
      public string? Imagen { get; set;}
+     
      public int? GrupoId { get; set;}
 
      public int? SucursalId { get; set;}
-     public Grupo? Grupo { get; set;} // Propiedad de navegación
 
+    [ForeignKey("GrupoId")]
+     public Grupo? Grupo { get; set;} // Propiedad de navegación
+    
+    [ForeignKey("SucursalId")]
      public Sucursal? Sucursal { get; set;}
  }

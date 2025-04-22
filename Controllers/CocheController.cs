@@ -56,6 +56,7 @@ namespace proyecto_centauro.Controllers
             if (coche == null) return NotFound();
             return Ok(coche);
         }
+
         [HttpPost]
         public async Task<ActionResult> CrearCoche([FromForm] Coche coche, IFormFile? imagen)
         {
@@ -80,7 +81,7 @@ namespace proyecto_centauro.Controllers
 
             await _cocheRepositorio.AgregarCoche(coche);
 
-            var cocheDTO = new CocheDTO
+            var cocheDTO = new Coche
             {
                 Id = coche.Id,
                 Marca = coche.Marca,
@@ -96,6 +97,8 @@ namespace proyecto_centauro.Controllers
                 Imagen = coche.Imagen,
                 GrupoId = coche.GrupoId,
                 SucursalId = coche.SucursalId,
+                Grupo = coche.Grupo,
+                Sucursal = coche.Sucursal
             };
             return StatusCode(201, cocheDTO);
         }
