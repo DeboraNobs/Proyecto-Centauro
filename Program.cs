@@ -5,6 +5,7 @@ using proyecto_centauro.Repositorios;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,7 @@ builder.Services.AddCors(options =>
 // configurar localización
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
+
 builder.Services.AddControllers()
     .AddDataAnnotationsLocalization(options =>
     {
@@ -32,8 +34,22 @@ builder.Services.AddControllers()
     })
     .AddJsonOptions(options =>
     {
-        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
     });
+
+/*
+builder.Services.AddControllers()
+    .AddDataAnnotationsLocalization(options =>
+    {
+        options.DataAnnotationLocalizerProvider = (type, factory) =>
+            factory.Create(typeof(proyecto_centauro.SharedResource));
+    })
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
+*/
+
 
 // configurar la base de datos SQLite
 builder.Services.AddDbContext<BBDDContext>(options =>

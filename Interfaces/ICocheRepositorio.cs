@@ -1,4 +1,5 @@
 using proyecto_centauro.Models;
+using proyecto_centauro.Models.DTO;
 
 namespace proyecto_centauro.Interfaces
 {
@@ -6,8 +7,8 @@ namespace proyecto_centauro.Interfaces
     {
         Task<IEnumerable<Coche>> ObtenerTodosCoches();
         Task<IEnumerable<Coche>> ObtenerTodosCochesConRelacionGrupo();
-        Task<IEnumerable<Coche>> ObtenerCochesFiltrados(int? sucursalId); 
-        // Task<IEnumerable<Coche>> ObtenerCochesFiltrados(int? sucursalId, DateTime fechainicio, DateTime fechaFin, TimeSpan horarioRecogida, TimeSpan horarioDevolucion);
+        // Task<IEnumerable<Coche>> ObtenerCochesFiltradosBySucursalId(int? sucursalId); 
+        Task<IEnumerable<CocheDisponibilidadDTO>> ObtenerCochesFiltrados(int? sucursalId, DateTime? fechainicio, DateTime? fechaFin);         
         Task<Coche> ObtenerCochePorId(int id);
         Task AgregarCoche(Coche coche);
         Task ActualizarCoche(Coche coche);

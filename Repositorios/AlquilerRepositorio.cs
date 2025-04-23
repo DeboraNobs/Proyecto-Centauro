@@ -16,7 +16,9 @@ namespace proyecto_centauro.Repositorios
 
         public async Task<IEnumerable<Alquiler>> ObtenerTodos()
         {
-            return await _context.Alquileres.ToListAsync();
+            return await _context.Alquileres
+                                            .OrderBy(a => a.GrupoId)
+                                            .ToListAsync();
         }
         public async Task<Alquiler> ObtenerAlquilerPorId(int id)
         {
@@ -42,14 +44,14 @@ namespace proyecto_centauro.Repositorios
             var usuario = await _context.Users.FindAsync(alquiler.UsersId);
             if (usuario == null) throw new KeyNotFoundException($"No se ha encontrado un usuario con id: {alquiler.UsersId}");
 
-            // Verificar cuántos coches hay en el grupo
+            // cantidad coches hay en el grupo
             var totalCochesEnGrupo = await _context.Coches
                 .Where(c => c.GrupoId == alquiler.GrupoId)
                 .CountAsync();
 
-            // Verificar cuántos alquileres activos hay en el grupo
+            // cantidad alquileres activos hay en el grupo
             var alquileresActivos = await _context.Alquileres
-                .Where(a => a.GrupoId == alquiler.GrupoId && a.FechaFin > DateTime.Now) // mejorar la logica
+                .Where(a => a.GrupoId == alquiler.GrupoId && a.FechaFin > DateTime.Now) // mejorar la logica (tiene que ver si hay alguna reserva para mostrar, si hay un alquiler que este dentro de fechainicio-fecha fin no esta disponible el coche)
                 .CountAsync();
 
             var cochesDisponibles = totalCochesEnGrupo - alquileresActivos;
