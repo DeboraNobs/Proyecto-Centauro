@@ -42,7 +42,7 @@ namespace proyecto_centauro.Repositorios
                     Posee_aire_acondicionado = c.Posee_aire_acondicionado,
                     GrupoId = c.GrupoId,
                     SucursalId = c.SucursalId,
-                    // Imagen = c.Imagen,
+                    Imagen = c.Imagen,
                     Grupo = c.Grupo == null ? null : new Grupo // gracias a crear un nuevo grupo se devuelven bien los datos 
                     {
                         Id = c.Grupo.Id,
@@ -59,6 +59,7 @@ namespace proyecto_centauro.Repositorios
                 .OrderBy(s => s.Sucursal!.Id)
                 .ToListAsync();
         }
+
 
         /*
                 public async Task<IEnumerable<Coche>> ObtenerCochesFiltradosBySucursalId(int? sucursalId)
@@ -103,107 +104,15 @@ namespace proyecto_centauro.Repositorios
         */
 
 
-
-
-
-
-        /*  funciona *************************************************************
-                public async Task<IEnumerable<Coche>> ObtenerCochesFiltrados(int? sucursalId, DateTime? fechainicio, DateTime? fechaFin)
-                {
-                    if (!sucursalId.HasValue || !fechainicio.HasValue || !fechaFin.HasValue)
-                        return [];
-
-                    // Paso 1: Traer todos los coches de la sucursal
-                    var cochesSucursal = await _context.Coches
-                        .Where(c => c.SucursalId == sucursalId)
-
-                         .Select(c => new Coche
-                            {
-                                Id = c.Id,
-                                Marca = c.Marca,
-                                Modelo = c.Modelo,
-                                Descripcion = c.Descripcion,
-                                Patente = c.Patente,
-                                Tipo_coche = c.Tipo_coche,
-                                Tipo_cambio = c.Tipo_cambio,
-                                Num_plazas = c.Num_plazas,
-                                Num_maletas = c.Num_maletas,
-                                Num_puertas = c.Num_puertas,
-                                Posee_aire_acondicionado = c.Posee_aire_acondicionado,
-                                GrupoId = c.GrupoId,
-                                SucursalId = c.SucursalId,
-                                // Imagen = c.Imagen,
-                                Grupo = c.Grupo == null ? null : new Grupo
-                                {
-                                    Id = c.Grupo.Id,
-                                    Nombre = c.Grupo.Nombre,
-                                    Precio = c.Grupo.Precio,
-                                    Descripcion = c.Grupo.Descripcion
-                                },
-                                Sucursal = c.Sucursal == null ? null : new Sucursal
-                                {
-                                    Id = c.Sucursal.Id,
-                                    Nombre = c.Sucursal.Nombre,
-                                }
-                            })
-
-                        .ToListAsync();
-
-                    // Paso 2: Agrupar coches por grupo
-                    var cochesPorGrupo = cochesSucursal
-                        .Where(c => c.GrupoId.HasValue)
-                        .GroupBy(c => c.GrupoId!.Value)
-                        .ToDictionary(g => g.Key, g => g.ToList());
-
-                    // Paso 3: Contar alquileres activos por grupo para ese rango de fechas
-                    var alquileresEnRango = await _context.Alquileres
-                        .Where(a =>
-                            a.Fechainicio <= fechaFin &&
-                            a.FechaFin >= fechainicio
-                        )
-                        .GroupBy(a => a.GrupoId)
-                        .Select(g => new { GrupoId = g.Key, Cantidad = g.Count() })
-                        .ToListAsync();
-
-                    var alquileresPorGrupo = alquileresEnRango
-                        .Where(a => a.GrupoId != null)
-                        .ToDictionary(a => a.GrupoId!.Value, a => a.Cantidad);
-
-                    // Paso 4: Filtrar coches de grupos donde haya disponibilidad
-                    var cochesDisponibles = new List<Coche>();
-
-                    foreach (var grupo in cochesPorGrupo)
-                    {
-                        var grupoId = grupo.Key;
-                        var coches = grupo.Value;
-                        var totalCoches = coches.Count;
-                        var alquileres = alquileresPorGrupo.TryGetValue(grupoId, out int value) ? value : 0;
-
-                        var disponibles = totalCoches - alquileres;
-
-                        if (disponibles > 0)
-                        {
-                            // Agregar solo la cantidad disponible
-                            cochesDisponibles.AddRange(coches.Take(disponibles));
-                        }
-                    }
-
-                    return cochesDisponibles;
-                }
-        */
-
-
-
-
         public async Task<IEnumerable<CocheDisponibilidadDTO>> ObtenerCochesFiltrados(int? sucursalId, DateTime? fechainicio, DateTime? fechaFin)
         {
-            if (!sucursalId.HasValue || !fechainicio.HasValue || !fechaFin.HasValue)
+            if (!sucursalId.HasValue || !fechainicio.HasValue || !fechaFin.HasValue) // si falta un parámetro de búsqueda devuelve una lista vacía
                 return [];
 
-            // Paso 1: Traer todos los coches de la sucursal
+            // obtengo todos los coches de la sucursal indicada
             var cochesSucursal = await _context.Coches
                 .Where(c => c.SucursalId == sucursalId)
-                .Select(c => new CocheDisponibilidadDTO
+                .Select(c => new CocheDisponibilidadDTO // transformo a un DTO con toda la info necesaria para mostrar.
                 {
                     Id = c.Id,
                     Marca = c.Marca,
@@ -229,42 +138,45 @@ namespace proyecto_centauro.Repositorios
                 })
                 .ToListAsync();
 
-            // Paso 2: Agrupar coches por grupo
+            // cuento alquileres activos por grupo para ese rango de fechas
+            var alquileresEnRango = await _context.Alquileres
+                .Where(a =>       // consulto todos los alquileres que se cruzan con el rango de fechas dado
+                    a.Fechainicio <= fechaFin &&
+                    a.FechaFin >= fechainicio
+                )
+                .GroupBy(a => a.GrupoId)
+                .Select(g => new { GrupoId = g.Key, Cantidad = g.Count() }) // cuento la cantidad de alquileres disponibles que cada grupo tiene
+                .ToListAsync();
+
+            var alquileresPorGrupo = alquileresEnRango // obtengo la cantidad de alquileres activos por grupo
+                .Where(a => a.GrupoId != null)
+                .ToDictionary(a => a.GrupoId!.Value, a => a.Cantidad);
+
+            // agrupo coches por grupo
             var cochesPorGrupo = cochesSucursal
                 .Where(c => c.Grupo != null)
                 .GroupBy(c => c.Grupo!.Id)
                 .ToDictionary(g => g.Key, g => g.ToList());
 
-            // Paso 3: Contar alquileres activos por grupo para ese rango de fechas
-            var alquileresEnRango = await _context.Alquileres
-                .Where(a =>
-                    a.Fechainicio <= fechaFin &&
-                    a.FechaFin >= fechainicio
-                )
-                .GroupBy(a => a.GrupoId)
-                .Select(g => new { GrupoId = g.Key, Cantidad = g.Count() })
-                .ToListAsync();
-
-            var alquileresPorGrupo = alquileresEnRango
-                .Where(a => a.GrupoId != null)
-                .ToDictionary(a => a.GrupoId!.Value, a => a.Cantidad);
-
-            // Paso 4: Filtrar coches de grupos donde haya disponibilidad
+            // filtro coches de grupos donde haya disponibilidad
             var cochesDisponibles = new List<CocheDisponibilidadDTO>();
 
             foreach (var grupo in cochesPorGrupo)
             {
                 var grupoId = grupo.Key;
-                var coches = grupo.Value;
-                var totalCoches = coches.Count;
-                var alquileres = alquileresPorGrupo.TryGetValue(grupoId, out int value) ? value : 0;
+                var listaCoches = grupo.Value; // lista de coches de un determinado grupo
+                
+                var totalCoches = listaCoches.Count; 
+                var cochesAlquilados = alquileresPorGrupo.TryGetValue(grupoId, out int value) ? value : 0;
 
-                var disponibles = totalCoches - alquileres;
-
-                if (disponibles > 0)
-                {
-                    cochesDisponibles.AddRange(coches.Take(disponibles));
+                var disponibles = totalCoches - cochesAlquilados;
+                
+                if (disponibles > 0) {
+                    for (int i = 0; i < disponibles && i < listaCoches.Count; i++) {
+                        cochesDisponibles.Add(listaCoches[i]);
+                    }
                 }
+
             }
 
             return cochesDisponibles;
@@ -293,10 +205,6 @@ namespace proyecto_centauro.Repositorios
         }
         public async Task ActualizarCoche(Coche coche)
         {
-            /*var c = await _context.Coches.FindAsync(coche.Id);
-            c.Marca = coche.Marca;
-            c.Sucursal = coche.Sucursal;
-            */
             _context.Entry(coche).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
