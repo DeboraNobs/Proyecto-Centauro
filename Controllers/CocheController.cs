@@ -30,26 +30,6 @@ namespace proyecto_centauro.Controllers
             return Ok(coches);
         }
 
-/*
-        [HttpGet("con-filtrado-sucursal")]
-        public async Task<ActionResult<IEnumerable<Coche>>> ObtenerCochesFiltradosBySucursalId([FromQuery] int? sucursalId)
-        {
-            try
-            {
-                var coches = await _cocheRepositorio.ObtenerCochesFiltradosBySucursalId(sucursalId); 
-                if (coches == null || !coches.Any())
-                {
-                    return NotFound(new { mensaje = "No se encontraron coches para esta sucursal." });
-                }
-
-                return Ok(coches);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { mensaje = "Hubo un error al obtener los coches.", detalle = ex.Message });
-            }
-        }
-*/
 
         [HttpGet("con-filtrado")]
         public async Task<ActionResult<IEnumerable<CocheDisponibilidadDTO>>> GetCochesFiltrados(

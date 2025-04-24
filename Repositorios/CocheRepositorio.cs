@@ -61,49 +61,6 @@ namespace proyecto_centauro.Repositorios
         }
 
 
-        /*
-                public async Task<IEnumerable<Coche>> ObtenerCochesFiltradosBySucursalId(int? sucursalId)
-                {
-                    if (sucursalId.HasValue)
-                    {
-                        return await _context.Coches
-                            .Where(c => c.SucursalId == sucursalId)
-                            .Select(c => new Coche
-                            {
-                                Id = c.Id,
-                                Marca = c.Marca,
-                                Modelo = c.Modelo,
-                                Descripcion = c.Descripcion,
-                                Patente = c.Patente,
-                                Tipo_coche = c.Tipo_coche,
-                                Tipo_cambio = c.Tipo_cambio,
-                                Num_plazas = c.Num_plazas,
-                                Num_maletas = c.Num_maletas,
-                                Num_puertas = c.Num_puertas,
-                                Posee_aire_acondicionado = c.Posee_aire_acondicionado,
-                                GrupoId = c.GrupoId,
-                                SucursalId = c.SucursalId,
-                                Imagen = c.Imagen,
-                                Grupo = c.Grupo == null ? null : new Grupo
-                                {
-                                    Id = c.Grupo.Id,
-                                    Nombre = c.Grupo.Nombre,
-                                    Precio = c.Grupo.Precio,
-                                    Descripcion = c.Grupo.Descripcion
-                                },
-                                Sucursal = c.Sucursal == null ? null : new Sucursal
-                                {
-                                    Id = c.Sucursal.Id,
-                                    Nombre = c.Sucursal.Nombre,
-                                }
-                            })
-                            .ToListAsync();
-                    }
-                    return await _context.Coches.ToListAsync();
-                }
-        */
-
-
         public async Task<IEnumerable<CocheDisponibilidadDTO>> ObtenerCochesFiltrados(int? sucursalId, DateTime? fechainicio, DateTime? fechaFin)
         {
             if (!sucursalId.HasValue || !fechainicio.HasValue || !fechaFin.HasValue) // si falta un parámetro de búsqueda devuelve una lista vacía
@@ -124,11 +81,13 @@ namespace proyecto_centauro.Repositorios
                     Num_plazas = c.Num_plazas,
                     Num_maletas = c.Num_maletas,
                     Num_puertas = c.Num_puertas,
+                    Imagen = c.Imagen,
                     Posee_aire_acondicionado = c.Posee_aire_acondicionado,
                     Grupo = c.Grupo == null ? null : new GrupoDTO
                     {
                         Id = c.Grupo.Id,
                         Nombre = c.Grupo.Nombre,
+                        Precio = c.Grupo.Precio
                     },
                     Sucursal = c.Sucursal == null ? null : new SucursalDTO
                     {
@@ -141,9 +100,9 @@ namespace proyecto_centauro.Repositorios
             // cuento alquileres activos por grupo para ese rango de fechas
             var alquileresEnRango = await _context.Alquileres
                 .Where(a =>       // consulto todos los alquileres que se cruzan con el rango de fechas dado
-                    a.Fechainicio <= fechaFin &&
-                    a.FechaFin >= fechainicio
-                )
+                       a.Fechainicio <= fechaFin &&
+                       a.FechaFin >= fechainicio
+                    )
                 .GroupBy(a => a.GrupoId)
                 .Select(g => new { GrupoId = g.Key, Cantidad = g.Count() }) // cuento la cantidad de alquileres disponibles que cada grupo tiene
                 .ToListAsync();
@@ -160,7 +119,6 @@ namespace proyecto_centauro.Repositorios
 
             // filtro coches de grupos donde haya disponibilidad
             var cochesDisponibles = new List<CocheDisponibilidadDTO>();
-
             foreach (var grupo in cochesPorGrupo)
             {
                 var grupoId = grupo.Key;
@@ -170,19 +128,14 @@ namespace proyecto_centauro.Repositorios
                 var cochesAlquilados = alquileresPorGrupo.TryGetValue(grupoId, out int value) ? value : 0;
 
                 var disponibles = totalCoches - cochesAlquilados;
-                
                 if (disponibles > 0) {
                     for (int i = 0; i < disponibles && i < listaCoches.Count; i++) {
                         cochesDisponibles.Add(listaCoches[i]);
                     }
                 }
-
             }
-
             return cochesDisponibles;
         }
-
-
 
 
         public async Task<Coche> ObtenerCochePorId(int id)

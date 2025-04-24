@@ -7,7 +7,6 @@ namespace proyecto_centauro.Interfaces
     {
         Task<IEnumerable<Coche>> ObtenerTodosCoches();
         Task<IEnumerable<Coche>> ObtenerTodosCochesConRelacionGrupo();
-        // Task<IEnumerable<Coche>> ObtenerCochesFiltradosBySucursalId(int? sucursalId); 
         Task<IEnumerable<CocheDisponibilidadDTO>> ObtenerCochesFiltrados(int? sucursalId, DateTime? fechainicio, DateTime? fechaFin);         
         Task<Coche> ObtenerCochePorId(int id);
         Task AgregarCoche(Coche coche);
