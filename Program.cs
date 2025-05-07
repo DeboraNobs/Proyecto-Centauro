@@ -10,7 +10,7 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Habilitar CORS
+// habilitar CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp",
@@ -37,25 +37,12 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
     });
 
-/*
-builder.Services.AddControllers()
-    .AddDataAnnotationsLocalization(options =>
-    {
-        options.DataAnnotationLocalizerProvider = (type, factory) =>
-            factory.Create(typeof(proyecto_centauro.SharedResource));
-    })
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-    });
-*/
-
 
 // configurar la base de datos SQLite
 builder.Services.AddDbContext<BBDDContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorioDapper>(); // antes era UsuarioRepositorio
 builder.Services.AddScoped<IAlquilerRepositorio, AlquilerRepositorio>();
 builder.Services.AddScoped<IServicioRepositorio, ServicioRepositorio>();
 builder.Services.AddScoped<IGrupoRepositorio, GrupoRepositorio>();
@@ -83,7 +70,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidIssuer = "tuApp",
         ValidAudience = "tuApp",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]!)), // Busca en appsettings.json la key definida en JWT
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]!)), // busca en appsettings.json la key definida en JWT
         ValidateIssuer = false,
         ValidateAudience = false,
     };
