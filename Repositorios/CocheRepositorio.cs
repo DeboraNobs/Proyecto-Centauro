@@ -101,7 +101,7 @@ namespace proyecto_centauro.Repositorios
             var alquileresEnRango = await _context.Alquileres
                 .Where(a =>       // consulto todos los alquileres que se cruzan con el rango de fechas dado
                        a.Fechainicio <= fechaFin &&
-                       a.FechaFin >= fechainicio
+                       a.FechaFin >= fechainicio 
                     )
                 .GroupBy(a => a.GrupoId)
                 .Select(g => new { GrupoId = g.Key, Cantidad = g.Count() }) // cuento la cantidad de alquileres disponibles que cada grupo tiene
