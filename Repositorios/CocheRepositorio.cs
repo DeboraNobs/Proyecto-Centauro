@@ -61,9 +61,12 @@ namespace proyecto_centauro.Repositorios
         }
 
 
-        public async Task<IEnumerable<CocheDisponibilidadDTO>> ObtenerCochesFiltrados(int? sucursalId, DateTime? fechainicio, DateTime? fechaFin)
+        public async Task<IEnumerable<CocheDisponibilidadDTO>> ObtenerCochesFiltrados
+            (
+                int? sucursalId, DateTime? fechainicio, DateTime? fechaFin, TimeSpan? horarioRecogida, TimeSpan? horarioDevolucion
+            )
         {
-            if (!sucursalId.HasValue || !fechainicio.HasValue || !fechaFin.HasValue) // si falta un parámetro de búsqueda devuelve una lista vacía
+            if (!sucursalId.HasValue || !fechainicio.HasValue || !fechaFin.HasValue || !horarioRecogida.HasValue || !horarioDevolucion.HasValue) // si falta un parámetro de búsqueda devuelve una lista vacía
                 return [];
 
             // obtengo todos los coches de la sucursal indicada
@@ -98,14 +101,21 @@ namespace proyecto_centauro.Repositorios
                 .ToListAsync();
 
             // cuento alquileres activos por grupo para ese rango de fechas
-            var alquileresEnRango = await _context.Alquileres
-                .Where(a =>       // consulto todos los alquileres que se cruzan con el rango de fechas dado
-                       a.Fechainicio <= fechaFin &&
-                       a.FechaFin >= fechainicio 
-                    )
-                .GroupBy(a => a.GrupoId)
-                .Select(g => new { GrupoId = g.Key, Cantidad = g.Count() }) // cuento la cantidad de alquileres disponibles que cada grupo tiene
+            var alquileres = await _context.Alquileres
+                .Where(a =>
+                    a.Fechainicio <= fechaFin &&
+                    a.FechaFin >= fechainicio)
                 .ToListAsync();
+
+            var alquileresEnRango = alquileres
+                .Where(a =>
+                    a.Fechainicio <= fechaFin &&
+                    a.FechaFin >= fechainicio &&
+                    a.HorarioRecogida < horarioDevolucion && // inicio del alquiler existente es antes del fin de la solicitud
+                    a.HorarioDevolucion > horarioRecogida)   // fin del alquiler existente es después del inicio de la solicitud
+                .GroupBy(a => a.GrupoId)
+                .Select(g => new { GrupoId = g.Key, Cantidad = g.Count() })
+                .ToList();
 
             var alquileresPorGrupo = alquileresEnRango // obtengo la cantidad de alquileres activos por grupo
                 .Where(a => a.GrupoId != null)
@@ -123,13 +133,15 @@ namespace proyecto_centauro.Repositorios
             {
                 var grupoId = grupo.Key;
                 var listaCoches = grupo.Value; // lista de coches de un determinado grupo
-                
-                var totalCoches = listaCoches.Count; 
+
+                var totalCoches = listaCoches.Count;
                 var cochesAlquilados = alquileresPorGrupo.TryGetValue(grupoId, out int value) ? value : 0;
 
                 var disponibles = totalCoches - cochesAlquilados;
-                if (disponibles > 0) {
-                    for (int i = 0; i < disponibles && i < listaCoches.Count; i++) {
+                if (disponibles > 0)
+                {
+                    for (int i = 0; i < disponibles && i < listaCoches.Count; i++)
+                    {
                         cochesDisponibles.Add(listaCoches[i]);
                     }
                 }
