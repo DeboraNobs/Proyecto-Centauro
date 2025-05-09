@@ -5,7 +5,7 @@ namespace proyecto_centauro.Interfaces
 {
     public interface IAlquilerRepositorio
     {
-        Task<IEnumerable<Alquiler>> ObtenerTodos();
+        Task<IEnumerable<AlquilerDTO>> ObtenerTodos(); // era Alquiler
         Task<Alquiler> ObtenerAlquilerPorId(int id);
         Task AgregarAlquiler(Alquiler alquiler);
         Task ActualizarAlquiler(Alquiler alquiler);

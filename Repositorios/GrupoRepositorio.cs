@@ -1,24 +1,31 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using proyecto_centauro.Data;
 using proyecto_centauro.Interfaces;
 using proyecto_centauro.Models;
+using proyecto_centauro.Models.DTO;
 
 namespace proyecto_centauro.Repositorios
 {
     public class GrupoRepositorio : IGrupoRepositorio
     {
         private readonly BBDDContext _context;
-
-        public GrupoRepositorio(BBDDContext contexto)
+        private readonly IMapper _mapper;
+        
+        public GrupoRepositorio(BBDDContext contexto, IMapper mapper)
         {
             _context = contexto;
+            _mapper = mapper;
         }
         
-        public async Task<IEnumerable<Grupo>> ObtenerTodos()
+        public async Task<IEnumerable<GrupoDTO>> ObtenerTodos()
         {
-            return await _context.Grupos.ToListAsync();
+            var grupos =  await _context.Grupos.ToListAsync();
+            var gruposDTO = _mapper.Map<List<GrupoDTO>>(grupos);
+            return gruposDTO;
         }
+
         public async Task<Grupo> ObtenerGrupoPorId(int id) 
         {
             var grupo = await _context.Grupos.FindAsync(id);

@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using proyecto_centauro.Data;
 using proyecto_centauro.Interfaces;
@@ -8,17 +9,22 @@ namespace proyecto_centauro.Repositorios
     public class AlquilerRepositorio : IAlquilerRepositorio
     {
         private readonly BBDDContext _context;
-
-        public AlquilerRepositorio(BBDDContext contexto)
+        private readonly IMapper _mapper;
+        
+        public AlquilerRepositorio(BBDDContext contexto, IMapper mapper)
         {
             _context = contexto;
+            _mapper = mapper; 
         }
 
-        public async Task<IEnumerable<Alquiler>> ObtenerTodos()
+        public async Task<IEnumerable<AlquilerDTO>> ObtenerTodos()
         {
-            return await _context.Alquileres
+            var alquileres = await _context.Alquileres
                                             .OrderBy(a => a.Fechainicio)
                                             .ToListAsync();
+
+            var alquileresDTOS = _mapper.Map<List<AlquilerDTO>>(alquileres);
+            return alquileresDTOS;
         }
         public async Task<Alquiler> ObtenerAlquilerPorId(int id)
         {

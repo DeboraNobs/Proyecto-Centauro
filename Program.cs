@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text.Json.Serialization;
+using System.Reflection;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,7 +47,7 @@ builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorioDapper>(); // 
 builder.Services.AddScoped<IAlquilerRepositorio, AlquilerRepositorio>();
 builder.Services.AddScoped<IServicioRepositorio, ServicioRepositorio>();
 builder.Services.AddScoped<IGrupoRepositorio, GrupoRepositorio>();
-builder.Services.AddScoped<ICocheRepositorio, CocheRepositorio>();
+builder.Services.AddScoped<ICocheRepositorio, CocheRepositorioDapper>(); // antes CocheRepositorio
 builder.Services.AddScoped<ISucursalRepositorio, SucursalRepositorioDapper>(); // antes era SucursalRepositorio
 
 builder.Services.AddEndpointsApiExplorer();
@@ -76,6 +77,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 
