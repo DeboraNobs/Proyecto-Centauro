@@ -87,7 +87,7 @@ public class UsuarioRepositorioDapper : IUsuarioRepositorio
     {
         using (var connection = new SQLiteConnection(_connectionString))
         {
-            var sql = "SELECT COUNT(1) FROM Users WHERE Id = @Id";
+            var sql = "SELECT COUNT(*) FROM Users WHERE Id = @Id";
             var count = await connection.ExecuteScalarAsync<int>(sql, new { Id = id });
             return count > 0;
         }

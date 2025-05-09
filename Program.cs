@@ -47,7 +47,7 @@ builder.Services.AddScoped<IAlquilerRepositorio, AlquilerRepositorio>();
 builder.Services.AddScoped<IServicioRepositorio, ServicioRepositorio>();
 builder.Services.AddScoped<IGrupoRepositorio, GrupoRepositorio>();
 builder.Services.AddScoped<ICocheRepositorio, CocheRepositorio>();
-builder.Services.AddScoped<ISucursalRepositorio, SucursalRepositorio>();
+builder.Services.AddScoped<ISucursalRepositorio, SucursalRepositorioDapper>(); // antes era SucursalRepositorio
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
