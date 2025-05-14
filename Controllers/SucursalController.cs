@@ -7,28 +7,26 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using proyecto_centauro.Interfaces;
+using proyecto_centauro.Interfaces.InterfacesBusiness;
 using proyecto_centauro.Models;
+using proyecto_centauro.Models.DTO;
+using proyecto_centauro.Requests;
 
 namespace proyecto_centauro.Controllers
 {
     [Route("api/sucursal")]
     [ApiController]
-    public class SucursalController : Controller
+    public class SucursalController(ISucursalBusiness business) : Controller
     {
-        private readonly ISucursalRepositorio _sucursalRepositorio;
 
-        public SucursalController(ISucursalRepositorio sucursalRepositorio)
+        [HttpGet] 
+        public async Task<ActionResult<List<SucursalDTO>>> GetSucursales([FromQuery] SucursalModelValidation.Search request)
         {
-            _sucursalRepositorio = sucursalRepositorio;
+            return await business.Search(request);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<Sucursal>> GetSucursales()
-        {
-            var sucursales = await _sucursalRepositorio.ObtenerTodas();
-            return Json(sucursales);
-        }
 
+/*
         [HttpGet("{id}")]
         public async Task<ActionResult<Sucursal>> GetSucursalById(int id)
         {
@@ -36,31 +34,26 @@ namespace proyecto_centauro.Controllers
             if (sucursal == null) return NotFound();
             return Json(sucursal);
         }
+*/
 
         [HttpPost]
-        public async Task<ActionResult<Sucursal>> AgregarSucursal([FromBody] Sucursal sucursal)
+        public async Task<ActionResult<SucursalDTO>> AgregarSucursal([FromForm] SucursalModelValidation.Insert request)
         {
-            if (sucursal == null) return BadRequest();
-            await _sucursalRepositorio.AgregarSucursal(sucursal);
-            return StatusCode(201, sucursal);
+            return await business.Insert(request);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> EditarSucursal(int id, [FromBody] Sucursal sucursal)
+        [HttpPut("{id}")] 
+        public async Task<ActionResult<SucursalDTO>> EditarSucursal(int id, [FromForm] SucursalModelValidation.Modify request)
         {
-            if (id != sucursal.Id) return BadRequest();
-            await _sucursalRepositorio.ActualizarSucursal(sucursal);
-            return NoContent();
+            request.Id = id;
+            return await business.Modify(request);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> BorrarSucursal(int id)
+        [HttpDelete("{id}")] 
+        public async Task<ActionResult<bool>> BorrarSucursal(int id, [FromForm] SucursalModelValidation.Delete request)
         {
-            var existeSucursal = await _sucursalRepositorio.ExisteSucursal(id);
-            if (!existeSucursal) return NotFound();
-
-            await _sucursalRepositorio.EliminarSucursal(id);
-            return NoContent(); 
+            request.Id = id;
+           return await business.Delete(request);
         }
 
     }

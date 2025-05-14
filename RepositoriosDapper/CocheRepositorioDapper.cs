@@ -8,7 +8,9 @@ using proyecto_centauro.Interfaces;
 using proyecto_centauro.Models;
 using proyecto_centauro.Models.DTO;
 
-public class CocheRepositorioDapper : ICocheRepositorio
+namespace proyecto_centauro.RepositoriosDapper
+{
+    public class CocheRepositorioDapper : ICocheRepositorio
 {
     private readonly string _connectionString;
     private readonly IMapper _mapper;
@@ -190,3 +192,5 @@ public class CocheRepositorioDapper : ICocheRepositorio
     }
 }
 
+
+}

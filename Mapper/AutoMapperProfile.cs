@@ -16,6 +16,8 @@ namespace proyecto_centauro.Mapper
             CreateMap<Grupo, GrupoDTO>();
             CreateMap<Sucursal, SucursalDTO>();
 
+            CreateMap<SucursalDTO, Sucursal>();
+
             CreateMap<CocheDTO, Coche>();
             CreateMap<Coche, CocheDTO>();
 
