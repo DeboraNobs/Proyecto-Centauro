@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using proyecto_centauro.Data;
 using proyecto_centauro.Interfaces;
+using proyecto_centauro.Interfaces.InterfacesDapper;
 using proyecto_centauro.Models;
 
 // Los repositorios de Dapper no usan BBDDContext. Aquí Dapper trabaja directamente con la base de datos por su cuenta.
-public class UsuarioRepositorioDapper : IUsuarioRepositorio
+public class UsuarioRepositorioDapper : IUsuarioDapper
 {
     private readonly string _connectionString;
 

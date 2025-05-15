@@ -7,6 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using proyecto_centauro.Interfaces.InterfacesDapper;
 
 namespace proyecto_centauro.Controllers
 {
@@ -17,10 +18,10 @@ namespace proyecto_centauro.Controllers
     // en lugar de acceder directamente a la base de datos.
     public class UsuarioControllerRefactorizado : Controller
     {
-        private readonly IUsuarioRepositorio _userRepositorio;
+        private readonly IUsuarioDapper _userRepositorio; // luego debere colocar IUsuarioRepositorio
         private readonly IConfiguration config;
 
-        public UsuarioControllerRefactorizado(IUsuarioRepositorio userRepositorio, IConfiguration config)
+        public UsuarioControllerRefactorizado(IUsuarioDapper userRepositorio, IConfiguration config) // luego debere colocar IUsuarioRepositorio
         {
             _userRepositorio = userRepositorio;
             this.config = config;
@@ -128,6 +129,9 @@ namespace proyecto_centauro.Controllers
 
     }
 
+    internal interface IUsuarioRepositorioDapper
+    {
+    }
 }
 
 #region sin businnes

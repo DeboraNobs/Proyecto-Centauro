@@ -3,9 +3,10 @@
 using System.Data.SQLite;
 using Dapper;
 using proyecto_centauro.Interfaces;
+using proyecto_centauro.Interfaces.InterfacesDapper;
 using proyecto_centauro.Models;
 
-public class SucursalRepositorioDapper : ISucursalRepositorio
+public class SucursalRepositorioDapper : ISucursalDapper
 {
     private readonly string _connectionString;
 

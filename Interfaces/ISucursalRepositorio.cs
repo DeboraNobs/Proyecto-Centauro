@@ -1,18 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 using proyecto_centauro.Models;
+using proyecto_centauro.Models.DTO;
+using proyecto_centauro.Requests;
 
 namespace proyecto_centauro.Interfaces
 {
     public interface ISucursalRepositorio
     {
-        Task<IEnumerable<Sucursal>> ObtenerTodas();
-        Task<Sucursal> ObtenerPorId(int id);
-        Task AgregarSucursal(Sucursal sucursal);
-        Task ActualizarSucursal(Sucursal sucursal);
-        Task EliminarSucursal(int id);
+        Task<List<Sucursal>> Search(SucursalModelValidation.Search search);
+        Task<SucursalDTO> Insert(SucursalModelValidation.Insert insert, DbTransaction? transaction = null);
+        Task<bool> Delete(SucursalModelValidation.Delete delete, DbTransaction? transaction = null);
+        Task<SucursalDTO> Modify(SucursalModelValidation.Modify modify, DbTransaction? transaction = null);
+        Task<SucursalDTO> ObtenerPorId(int id);
         Task<bool> ExisteSucursal(int id);
+        Task <bool> ExisteSucursalPorNombre(string nombre);
     }
 }

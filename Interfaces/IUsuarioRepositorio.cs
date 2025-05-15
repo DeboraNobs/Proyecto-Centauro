@@ -3,6 +3,7 @@ namespace proyecto_centauro.Interfaces
 {
       public interface IUsuarioRepositorio
     {
+    
         Task<Usuario?> ValidarCredencialesAsync(string email, string password);
         Task<IEnumerable<Usuario>> ObtenerTodosAsync(); // task<> significa que la función devuelve una tarea asíncrona.
         Task<Usuario> ObtenerPorIdAsync(int id);
@@ -10,5 +11,7 @@ namespace proyecto_centauro.Interfaces
         Task ActualizarAsync(Usuario usuario);
         Task EliminarAsync(int id);
         Task<bool> ExisteUsuarioAsync(int id);
+
+    
     }
 }

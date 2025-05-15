@@ -26,16 +26,6 @@ namespace proyecto_centauro.Controllers
         }
 
 
-/*
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Sucursal>> GetSucursalById(int id)
-        {
-            var sucursal = await _sucursalRepositorio.ObtenerPorId(id);
-            if (sucursal == null) return NotFound();
-            return Json(sucursal);
-        }
-*/
-
         [HttpPost]
         public async Task<ActionResult<SucursalDTO>> AgregarSucursal([FromForm] SucursalModelValidation.Insert request)
         {

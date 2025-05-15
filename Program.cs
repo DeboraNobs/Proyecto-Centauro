@@ -8,12 +8,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text.Json.Serialization;
 using System.Reflection;
 using proyecto_centauro.RepositoriosDapper;
-using proyecto_centauro.RepositoriosRequest;
-using proyecto_centauro.Interfaces.InterfacesValidation;
 using proyecto_centauro.Business;
 using proyecto_centauro.Interfaces.InterfacesBusiness;
 using System.Data;
 using System.Data.SQLite;
+using proyecto_centauro.Interfaces.InterfacesDapper;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -55,13 +54,12 @@ builder.Services.AddScoped<IDbConnection>(provider =>
 );
 
 // repositorios 
-builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorioDapper>(); // antes era UsuarioRepositorio
+builder.Services.AddScoped<IUsuarioDapper, UsuarioRepositorioDapper>(); // luego debere colocar IUsuarioRepositorio, y UsuarioRepositorio
 builder.Services.AddScoped<IAlquilerRepositorio, AlquilerRepositorio>();
 builder.Services.AddScoped<IServicioRepositorio, ServicioRepositorio>();
 builder.Services.AddScoped<IGrupoRepositorio, GrupoRepositorio>();
 builder.Services.AddScoped<ICocheRepositorio, CocheRepositorioDapper>(); // antes CocheRepositorio
-builder.Services.AddScoped<ISucursalRepositorioV, SucursalRepositorioRequest>(); // antes era SucursalRepositorio, y SucursalRepositorioDapper y he cambiado el repositorio (era sin V)
-// builder.Services.AddScoped<ISucursalRepositorio, SucursalRepositorio>();
+builder.Services.AddScoped<ISucursalRepositorio, SucursalRepositorio>();
 
 // business
 builder.Services.AddScoped<ISucursalBusiness, SucursalBusiness>();
