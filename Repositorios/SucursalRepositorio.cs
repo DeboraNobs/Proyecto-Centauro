@@ -183,8 +183,6 @@ namespace proyecto_centauro.Repositorios
             {
                 throw new Exception("Error al obtener las sucursales: " + ex.Message);
             }
-
-
         }
     }
 }

@@ -1,17 +1,18 @@
+using System.Data.Common;
 using proyecto_centauro.Models;
+using proyecto_centauro.Models.DTO;
+using proyecto_centauro.Requests;
 namespace proyecto_centauro.Interfaces
 {
-      public interface IUsuarioRepositorio
+    public interface IUsuarioRepositorio
     {
-    
+        Task<List<Usuario>> Search(UsuarioModelValidation.Search search);
+        Task<UsuarioDTO> Insert(UsuarioModelValidation.Insert insert, DbTransaction? transaction = null);
+        Task<bool> Delete(UsuarioModelValidation.Delete delete, DbTransaction? transaction = null);
+        Task<UsuarioDTO> Modify(UsuarioModelValidation.Modify modify, DbTransaction? transaction = null);
+        Task<bool> ExisteUsuario(int id);
+        Task<bool> ExisteUsuarioPorNombre(string nombre);
         Task<Usuario?> ValidarCredencialesAsync(string email, string password);
-        Task<IEnumerable<Usuario>> ObtenerTodosAsync(); // task<> significa que la función devuelve una tarea asíncrona.
-        Task<Usuario> ObtenerPorIdAsync(int id);
-        Task AgregarAsync(Usuario usuario); // no llevan ningún <> porque son void, no devuelven nada
-        Task ActualizarAsync(Usuario usuario);
-        Task EliminarAsync(int id);
-        Task<bool> ExisteUsuarioAsync(int id);
-
-    
+        Task<UsuarioDTO> ObtenerPorId(int id);
     }
 }

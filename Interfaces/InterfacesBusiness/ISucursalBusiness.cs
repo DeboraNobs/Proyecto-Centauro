@@ -12,9 +12,5 @@ namespace proyecto_centauro.Interfaces.InterfacesBusiness
         Task<SucursalDTO> Insert(SucursalModelValidation.Insert insert);
         Task<bool> Delete(SucursalModelValidation.Delete delete);
         Task<SucursalDTO> Modify(SucursalModelValidation.Modify modify);
-
-        // Task<SucursalDTO> ObtenerPorId(int id);
-
-        // Task<bool> ExisteSucursal(int id);
     }
 }

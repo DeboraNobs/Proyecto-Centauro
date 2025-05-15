@@ -6,7 +6,7 @@ namespace proyecto_centauro.Mapper
 {
     public class AutoMapperProfile : Profile // Profile tiene todas las características que AutoMapper maneja
     {
-        public AutoMapperProfile() 
+        public AutoMapperProfile()
         {
             // ¿Estás leyendo datos de la base y los vas a mostrar? → Entidad → DTO
             // ¿Estás recibiendo datos del cliente y los vas a guardar? → DTO → Entidad
@@ -24,6 +24,9 @@ namespace proyecto_centauro.Mapper
             CreateMap<Alquiler, AlquilerDTO>(); // para obtener todos los alquileres
 
             CreateMap<Grupo, GrupoDTO>();
+
+            CreateMap<Usuario, UsuarioDTO>();
         }
+        
     }
 }

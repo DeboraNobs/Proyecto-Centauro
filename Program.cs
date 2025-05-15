@@ -54,7 +54,8 @@ builder.Services.AddScoped<IDbConnection>(provider =>
 );
 
 // repositorios 
-builder.Services.AddScoped<IUsuarioDapper, UsuarioRepositorioDapper>(); // luego debere colocar IUsuarioRepositorio, y UsuarioRepositorio
+builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>(); 
+// builder.Services.AddScoped<IUsuarioDapper, UsuarioRepositorioDapper>();
 builder.Services.AddScoped<IAlquilerRepositorio, AlquilerRepositorio>();
 builder.Services.AddScoped<IServicioRepositorio, ServicioRepositorio>();
 builder.Services.AddScoped<IGrupoRepositorio, GrupoRepositorio>();
@@ -63,7 +64,7 @@ builder.Services.AddScoped<ISucursalRepositorio, SucursalRepositorio>();
 
 // business
 builder.Services.AddScoped<ISucursalBusiness, SucursalBusiness>();
-
+builder.Services.AddScoped<IUsuarioBusiness, UsuarioBusiness>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
